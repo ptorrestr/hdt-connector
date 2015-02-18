@@ -635,6 +635,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+python_LIBS
+python_CFLAGS
 boost_LIBS
 boost_CFLAGS
 HDT_LIBS
@@ -794,7 +796,9 @@ PKG_CONFIG_LIBDIR
 HDT_CFLAGS
 HDT_LIBS
 boost_CFLAGS
-boost_LIBS'
+boost_LIBS
+python_CFLAGS
+python_LIBS'
 
 
 # Initialize some variables set by options.
@@ -1459,6 +1463,9 @@ Some influential environment variables:
   boost_CFLAGS
               C compiler flags for boost, overriding pkg-config
   boost_LIBS  linker flags for boost, overriding pkg-config
+  python_CFLAGS
+              C compiler flags for python, overriding pkg-config
+  python_LIBS linker flags for python, overriding pkg-config
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -16177,6 +16184,97 @@ See \`config.log' for more details" "$LINENO" 5; }
 else
 	boost_CFLAGS=$pkg_cv_boost_CFLAGS
 	boost_LIBS=$pkg_cv_boost_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for python" >&5
+$as_echo_n "checking for python... " >&6; }
+
+if test -n "$python_CFLAGS"; then
+    pkg_cv_python_CFLAGS="$python_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"python3\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "python3") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_python_CFLAGS=`$PKG_CONFIG --cflags "python3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$python_LIBS"; then
+    pkg_cv_python_LIBS="$python_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"python3\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "python3") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_python_LIBS=`$PKG_CONFIG --libs "python3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        python_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "python3" 2>&1`
+        else
+	        python_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "python3" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$python_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (python3) were not met:
+
+$python_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables python_CFLAGS
+and python_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables python_CFLAGS
+and python_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	python_CFLAGS=$pkg_cv_python_CFLAGS
+	python_LIBS=$pkg_cv_python_LIBS
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 

@@ -15,5 +15,6 @@ src/.libs
 src/*.lo
 src/*.o
 src/*.la
+src/*.so
 stamp-h1
 

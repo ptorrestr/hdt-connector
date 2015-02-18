@@ -8,6 +8,7 @@ LT_INIT # libraries
 # LIBS path
 PKG_CHECK_MODULES([HDT], [hdt-1.0])
 PKG_CHECK_MODULES([boost], [boost-1.57])
+PKG_CHECK_MODULES([python], [python3])
 AC_SUBST([HDT_CFLAGS])
 AC_SUBST([HDT_LIBS])
 
