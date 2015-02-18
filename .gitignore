@@ -4,12 +4,16 @@
 # m4 cache
 *.cache
 
-# Configure and Makefile
+# Configure and Make
 Makefile
 config.h
 config.log
 config.status
 libtool
 src/.deps
+src/.libs
+src/*.lo
+src/*.o
+src/*.la
 stamp-h1
 
