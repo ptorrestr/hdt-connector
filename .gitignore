@@ -3,3 +3,13 @@
 
 # m4 cache
 *.cache
+
+# Configure and Makefile
+Makefile
+config.h
+config.log
+config.status
+libtool
+src/.deps
+stamp-h1
+
