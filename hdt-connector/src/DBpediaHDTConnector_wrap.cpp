@@ -27,6 +27,4 @@ BOOST_PYTHON_MODULE(hdtconnector)
 		.def("is_redirect", &DBpediaHDTConnector::is_redirect)
 		.def("get_definition", &DBpediaHDTConnector::get_definition)
 	;
-	
-	//def("greet", greet);
 }

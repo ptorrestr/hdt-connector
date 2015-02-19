@@ -1,13 +1,26 @@
 #include <DBpediaHDTConnector.h>
 
+// Transform std::vector into python list
+template<class T>
+py::list
+std_vector_to_py_list(const std::vector<T>& v)
+{
+	typename std::vector<T>::const_iterator iter;
+	py::list l;
+	for (iter = v.begin(); iter!= v.end(); ++iter) {
+		l.append(*iter);
+	}
+	return l;
+}
+
 // Function to transform std::set into python list
 template<class T>
-py::list std_set_to_py_list(const std::set<T>& v)
+py::list 
+std_set_to_py_list(const std::set<T>& v)
 {
-    py::object get_iter = py::iterator<std::set<T> >();
-    py::object iter = get_iter(v);
-    py::list l(iter);
-    return l;
+	cout << "transforming" << endl;
+	std::vector<T> u(v.begin(), v.end());
+	return std_vector_to_py_list(u);
 }
 
 const string DBpediaHDTConnector::REDIRECT_PROP = "http://dbpedia.org/ontology/wikiPageRedirects";

@@ -1,4 +1,4 @@
-HDT Connector
+:DT Connector
 =============
 
 This is a python module to process Dbpedia HDT files.
@@ -23,6 +23,10 @@ To read a HDT file you must use the object DBpediaHDTConnector. For example:
 ``
 import hdtconnector
 my_file = hdtconnector.DBpediaHDTConnector("my/path.hdt")
+
+resource = "my res"
+my_file.get_dbpedia_classes_of_res(resource)
+
 ``
 
 
