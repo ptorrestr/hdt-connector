@@ -22,7 +22,7 @@ private:
 
 public:
 	DBpediaHDTConnector(const string &hdt_file);
-	DBpediaHDTConnector(HDT *hdt);
+	~DBpediaHDTConnector();
 	IteratorTripleString* get_iterator_over_all_concepts();
 	string get_definition(const string &uri);
 	bool is_redirect(const string &from_uri, const string &to_uri);
@@ -36,7 +36,7 @@ public:
 	set<string> select_redirected_pages_to(const string &dbpedia_page);
 	string select_dbpedia_url_of_title(const string &title);
 	string get_dbpedia_url_for_title(const string &title);
-	bool is_redirect(const string &uri);
+	bool is_redirected(const string &uri);
 
 };
 
