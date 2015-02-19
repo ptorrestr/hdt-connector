@@ -17,3 +17,10 @@ Installation
 
 * Run make
   ``make``
+
+Execution
+----------
+Run ``python`` in the same folder where ``hdconnector.so`` is stored. Please be aware that ``python`` binary requires that the library paths should be added in ``LD_LIBRARY_PATH`` at the moment of execution. 
+
+Example:
+``LD_LIBRARY_PATH=/opt/usr/local/boost-1.56.0/lib:/home/pablo/workspace/c++/hdt-cpp/hdt-lib python``
