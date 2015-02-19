@@ -10,11 +10,11 @@ config.h
 config.log
 config.status
 libtool
-src/.deps
-src/.libs
-src/*.lo
-src/*.o
-src/*.la
-src/*.so
+*/*/.deps
+*/*/.libs
+*/*/*.lo
+*/*/*.o
+*/*/*.la
+*/*/*.so
 stamp-h1
 
