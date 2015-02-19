@@ -11,6 +11,10 @@ Installation
 * It is recomendable to use virtualenv to manage the paths when executing. For example you can set LD\_LIBRARY\_PATH in the activation script (MYENV/bin/activate).
 * You can install the module normally: ``python setup.py install``
 
+If you have issues with the autotool version, try the following:
+``cd hdt-connector && touch configure.ac aclocal.m4 configure Makefile.am Makefile.in``
+Then build again.
+
 Usage
 -----
 
