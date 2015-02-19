@@ -1,11 +1,6 @@
 #include <boost/python.hpp>
 #include <DBpediaHDTConnector.h>
 
-char const* greet()
-{
-   return "hello, world";
-}
-
 using namespace boost::python;
 
 static boost::shared_ptr<DBpediaHDTConnector> makeClass(const string &val)

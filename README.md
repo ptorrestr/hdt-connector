@@ -18,4 +18,12 @@ Then build again.
 Usage
 -----
 
+=Read HDT file=
+To read a HDT file you must use the object DBpediaHDTConnector. For example:
+``
+import hdtconnector
+my_file = hdtconnector.DBpediaHDTConnector("my/path.hdt")
+``
+
+
 

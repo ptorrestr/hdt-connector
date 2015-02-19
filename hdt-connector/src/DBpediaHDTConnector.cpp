@@ -1,5 +1,15 @@
 #include <DBpediaHDTConnector.h>
 
+// Function to transform std::set into python list
+template<class T>
+py::list std_set_to_py_list(const std::set<T>& v)
+{
+    py::object get_iter = py::iterator<std::set<T> >();
+    py::object iter = get_iter(v);
+    py::list l(iter);
+    return l;
+}
+
 const string DBpediaHDTConnector::REDIRECT_PROP = "http://dbpedia.org/ontology/wikiPageRedirects";
 const string DBpediaHDTConnector::CONCEPT_TITLE_PROP = "http://www.w3.org/2000/01/rdf-schema#label";
 const string DBpediaHDTConnector::DISAMB_PROP = "http://dbpedia.org/ontology/wikiPageDisambiguates";
@@ -74,7 +84,7 @@ DBpediaHDTConnector::is_redirect(const string &from_uri, const string &to_uri)
 	return result;
 }
 
-set<string> 
+py::list 
 DBpediaHDTConnector::get_dbpedia_categories_of_res(const string &uri)
 {
 	set<string> elements;
@@ -92,10 +102,10 @@ DBpediaHDTConnector::get_dbpedia_categories_of_res(const string &uri)
 		delete it;
 		it = NULL;
 	}
-	return elements;
+	return std_set_to_py_list(elements);
 }
 
-set<string> 
+py::list 
 DBpediaHDTConnector::get_dbpedia_classes_of_res(const string &uri)
 {
 	set<string> elements;
@@ -113,10 +123,10 @@ DBpediaHDTConnector::get_dbpedia_classes_of_res(const string &uri)
 		delete it;
 		it = NULL;
 	}
-	return elements;
+	return std_set_to_py_list(elements);
 }
 
-set<string> 
+py::list 
 DBpediaHDTConnector::get_dbpedia_labels(const string &uri)
 {
 	set<string> elements;
@@ -138,10 +148,10 @@ DBpediaHDTConnector::get_dbpedia_labels(const string &uri)
 		delete it;
 		it = NULL;
 	}
-	return elements;
+	return std_set_to_py_list(elements);
 }
 
-set<string> 
+py::list 
 DBpediaHDTConnector::disambiguation_pages(const string &dbpedia_page)
 {
 	set<string> elements;
@@ -159,7 +169,7 @@ DBpediaHDTConnector::disambiguation_pages(const string &dbpedia_page)
 		delete it;
 		it = NULL;
 	}
-	return elements;
+	return std_set_to_py_list(elements);
 }
 
 //TODO: Check if this function is properly used
@@ -224,7 +234,7 @@ DBpediaHDTConnector::is_disambiugation_page(const string &dbpedia_page)
 	return result;
 }
 
-set<string> 
+py::list 
 DBpediaHDTConnector::select_redirected_pages_to(const string &dbpedia_page)
 {
 	set<string> elements;
@@ -242,7 +252,7 @@ DBpediaHDTConnector::select_redirected_pages_to(const string &dbpedia_page)
 		delete it;
 		it = NULL;
 	}
-	return elements;
+	return std_set_to_py_list(elements);
 }
 
 string 
