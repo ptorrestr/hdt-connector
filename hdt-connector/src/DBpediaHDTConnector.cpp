@@ -18,7 +18,6 @@ template<class T>
 py::list 
 std_set_to_py_list(const std::set<T>& v)
 {
-	cout << "transforming" << endl;
 	std::vector<T> u(v.begin(), v.end());
 	return std_vector_to_py_list(u);
 }
@@ -45,7 +44,6 @@ DBpediaHDTConnector::DBpediaHDTConnector(const string &hdt_file) : dbpediaHDT(NU
 
 DBpediaHDTConnector::~DBpediaHDTConnector()
 {
-	cout << "deleting HDT connector" << endl;
 	if ( dbpediaHDT )
 	{
 		delete dbpediaHDT;
