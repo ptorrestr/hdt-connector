@@ -5,6 +5,7 @@
 #include <HDTManager.hpp>
 #include <ConvertProgress.h>
 #include <boost/python.hpp>
+#include <HDTIterator.h>
 
 using namespace std;
 using namespace hdt;
@@ -25,7 +26,7 @@ private:
 public:
 	DBpediaHDTConnector(const string &hdt_file);
 	~DBpediaHDTConnector();
-	IteratorTripleString* get_iterator_over_all_concepts();
+	boost::shared_ptr<HDTIterator> get_iterator_over_all_concepts();
 	py::list get_all_subjects();
 	string get_definition(const string &uri);
 	bool is_redirect(const string &from_uri, const string &to_uri);

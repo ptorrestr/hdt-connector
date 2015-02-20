@@ -1,5 +1,9 @@
 #include <DBpediaHDTConnector.h>
 
+// define in HDTUtilities.cpp
+extern string 
+replaceAll(string subject, const string& search, const string& replace);
+
 // Transform std::vector into python list
 template<class T>
 py::list
@@ -8,14 +12,14 @@ std_vector_to_py_list(const std::vector<T>& v)
 	typename std::vector<T>::const_iterator iter;
 	py::list l;
 	for (iter = v.begin(); iter!= v.end(); ++iter) {
-		l.append(*iter);
+	l.append(*iter);
 	}
 	return l;
 }
 
 // Function to transform std::set into python list
 template<class T>
-py::list 
+py::list
 std_set_to_py_list(const std::set<T>& v)
 {
 	std::vector<T> u(v.begin(), v.end());
@@ -51,10 +55,12 @@ DBpediaHDTConnector::~DBpediaHDTConnector()
 	}
 }
 
-IteratorTripleString
-*DBpediaHDTConnector::get_iterator_over_all_concepts()
+boost::shared_ptr<HDTIterator>
+DBpediaHDTConnector::get_iterator_over_all_concepts()
 {
-	return this->dbpediaHDT->search("", "", "");
+	IteratorTripleString *iter = this->dbpediaHDT->search("", "", "");
+	cout << iter->hasNext() << endl;
+	return boost::shared_ptr<HDTIterator>(new HDTIterator(iter));
 }
 
 py::list
@@ -330,17 +336,6 @@ DBpediaHDTConnector::select_dbpedia_url_of_title(const string &title)
 	}
 	return result;
 }
-
-string      
-replaceAll(string subject, const string& search, const string& replace) {
-	size_t pos = 0;
-	while ((pos = subject.find(search, pos)) != string::npos) {
-		subject.replace(pos, search.length(), replace);
-		pos += replace.length();
-	}
-	return subject;
-}
-
 
 string 
 DBpediaHDTConnector::get_dbpedia_url_for_title(const string &title)

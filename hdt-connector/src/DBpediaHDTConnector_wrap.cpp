@@ -1,5 +1,6 @@
 #include <boost/python.hpp>
 #include <DBpediaHDTConnector.h>
+#include <HDTIterator.h>
 
 using namespace boost::python;
 
@@ -10,9 +11,14 @@ static boost::shared_ptr<DBpediaHDTConnector> makeClass(const string &val)
 
 BOOST_PYTHON_MODULE(hdtconnector)
 {
+	class_<HDTIterator, boost::shared_ptr<HDTIterator> >("HDTIterator", init<IteratorTripleString *>())
+		.def("has_next", &HDTIterator::has_next)
+		.def("next", &HDTIterator::next)
+	;
 	
 	class_<DBpediaHDTConnector, boost::shared_ptr<DBpediaHDTConnector> >("DBpediaHDTConnector", init<string>())
 		.def("__init__", make_constructor(makeClass))
+		.def("get_iterator_over_all_concepts", &DBpediaHDTConnector::get_iterator_over_all_concepts)
 		.def("get_all_subjects", &DBpediaHDTConnector::get_all_subjects)
 		.def("is_redirected", &DBpediaHDTConnector::is_redirected)
 		.def("get_dbpedia_url_for_title", &DBpediaHDTConnector::get_dbpedia_url_for_title)
