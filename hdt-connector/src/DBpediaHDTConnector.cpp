@@ -57,6 +57,24 @@ IteratorTripleString
 	return this->dbpediaHDT->search("", "", "");
 }
 
+py::list
+DBpediaHDTConnector::get_all_subjects()
+{
+	set<string> elements;
+	IteratorTripleString *it = dbpediaHDT -> search("", "", "");
+	while ( it -> hasNext() )
+	{
+		TripleString *ts = it -> next();
+		elements.insert( ts -> getSubject().c_str() );
+	}
+	if ( it )
+	{
+		delete it;
+		it = NULL;
+	}
+	return std_set_to_py_list(elements);
+}
+
 string 
 DBpediaHDTConnector::get_definition(const string &uri)
 {

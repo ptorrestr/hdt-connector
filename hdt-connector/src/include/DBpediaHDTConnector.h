@@ -26,6 +26,7 @@ public:
 	DBpediaHDTConnector(const string &hdt_file);
 	~DBpediaHDTConnector();
 	IteratorTripleString* get_iterator_over_all_concepts();
+	py::list get_all_subjects();
 	string get_definition(const string &uri);
 	bool is_redirect(const string &from_uri, const string &to_uri);
 	py::list get_dbpedia_categories_of_res(const string &uri);

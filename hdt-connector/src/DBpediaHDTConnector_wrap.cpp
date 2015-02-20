@@ -13,6 +13,7 @@ BOOST_PYTHON_MODULE(hdtconnector)
 	
 	class_<DBpediaHDTConnector, boost::shared_ptr<DBpediaHDTConnector> >("DBpediaHDTConnector", init<string>())
 		.def("__init__", make_constructor(makeClass))
+		.def("get_all_subjects", &DBpediaHDTConnector::get_all_subjects)
 		.def("is_redirected", &DBpediaHDTConnector::is_redirected)
 		.def("get_dbpedia_url_for_title", &DBpediaHDTConnector::get_dbpedia_url_for_title)
 		.def("select_dbpedia_url_of_title", &DBpediaHDTConnector::select_dbpedia_url_of_title)
