@@ -50,7 +50,7 @@ class build_hdtconnector(build):
     self.execute(compile, [], 'compiling htdconnector')
     
     # Copy hdt to library build folder
-    self.copy_tree(build_path + "/bin", self.build_lib)
+    self.copy_tree(build_path + "/bin", self.build_lib + "/hdtconnector")
 
 class install_hdtconnector(install):
   def initialize_options(self):
@@ -90,6 +90,11 @@ setup(
   cmdclass = {
     'build' : build_hdtconnector,
     'install' : install_hdtconnector,
-  }
+  },
+  packages = ['hdt'],
+  install_requires = [
+    'pyaml >= 13.12.0',
+  ],
+  test_suite = 'hdt.tests',
 )
     

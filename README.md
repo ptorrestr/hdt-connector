@@ -22,8 +22,8 @@ Usage
 To read a HDT file you must use the object HDTConnector and then create a search. Each searching will create an iterator over the collection. For example:
 
 ```
-import hdtconnector
-m_map = hdtconnector.HDTConnector("my/path.hdt")
+from hdtconnector.hdtconnector import HDTConnector
+m_map = HDTConnector("my/path.hdt")
 
 # All the collection
 iter = m_map.search("", "", "")

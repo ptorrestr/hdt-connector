@@ -19,5 +19,21 @@ libtool
 stamp-h1
 
 # Python builds
-build
+*~
+*.pyc
+*.py[cod]
+
 *.egg-info
+*.eggs
+*.egg
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
