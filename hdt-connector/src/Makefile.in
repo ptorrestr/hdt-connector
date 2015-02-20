@@ -95,12 +95,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_hdtconnector_so_OBJECTS =  \
-	hdtconnector_so-DBpediaHDTConnector.$(OBJEXT) \
+am_hdtconnector_so_OBJECTS = hdtconnector_so-HDTConnector.$(OBJEXT) \
 	hdtconnector_so-ConvertProgress.$(OBJEXT) \
-	hdtconnector_so-DBpediaHDTConnector_wrap.$(OBJEXT) \
 	hdtconnector_so-HDTIterator.$(OBJEXT) \
-	hdtconnector_so-HDTUtilities.$(OBJEXT)
+	hdtconnector_so-hdtconnector_so.$(OBJEXT)
 hdtconnector_so_OBJECTS = $(am_hdtconnector_so_OBJECTS)
 hdtconnector_so_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -300,7 +298,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-hdtconnector_so_SOURCES = DBpediaHDTConnector.cpp ConvertProgress.cpp DBpediaHDTConnector_wrap.cpp HDTIterator.cpp HDTUtilities.cpp
+hdtconnector_so_SOURCES = HDTConnector.cpp ConvertProgress.cpp HDTIterator.cpp hdtconnector_so.cpp
 hdtconnector_so_CPPFLAGS = -fPIC -I./include $(HDT_CFLAGS) $(boost_CFLAGS) $(python_CFLAGS)
 #libhdtconnector_la_LIBADD = $(HDT_LIBS)/libhdt.a
 hdtconnector_so_LDFLAGS = -Wc,-shared -Wl,--export-dynamic $(HDT_LIBS) -lhdt $(boost_LIBS) -lboost_python $(python_LIBS)
@@ -399,10 +397,9 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-ConvertProgress.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-HDTConnector.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-HDTIterator.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-HDTUtilities.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdtconnector_so-hdtconnector_so.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -425,19 +422,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
-hdtconnector_so-DBpediaHDTConnector.o: DBpediaHDTConnector.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-DBpediaHDTConnector.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Tpo -c -o hdtconnector_so-DBpediaHDTConnector.o `test -f 'DBpediaHDTConnector.cpp' || echo '$(srcdir)/'`DBpediaHDTConnector.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Tpo $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='DBpediaHDTConnector.cpp' object='hdtconnector_so-DBpediaHDTConnector.o' libtool=no @AMDEPBACKSLASH@
+hdtconnector_so-HDTConnector.o: HDTConnector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-HDTConnector.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-HDTConnector.Tpo -c -o hdtconnector_so-HDTConnector.o `test -f 'HDTConnector.cpp' || echo '$(srcdir)/'`HDTConnector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-HDTConnector.Tpo $(DEPDIR)/hdtconnector_so-HDTConnector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='HDTConnector.cpp' object='hdtconnector_so-HDTConnector.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-DBpediaHDTConnector.o `test -f 'DBpediaHDTConnector.cpp' || echo '$(srcdir)/'`DBpediaHDTConnector.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-HDTConnector.o `test -f 'HDTConnector.cpp' || echo '$(srcdir)/'`HDTConnector.cpp
 
-hdtconnector_so-DBpediaHDTConnector.obj: DBpediaHDTConnector.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-DBpediaHDTConnector.obj -MD -MP -MF $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Tpo -c -o hdtconnector_so-DBpediaHDTConnector.obj `if test -f 'DBpediaHDTConnector.cpp'; then $(CYGPATH_W) 'DBpediaHDTConnector.cpp'; else $(CYGPATH_W) '$(srcdir)/DBpediaHDTConnector.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Tpo $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='DBpediaHDTConnector.cpp' object='hdtconnector_so-DBpediaHDTConnector.obj' libtool=no @AMDEPBACKSLASH@
+hdtconnector_so-HDTConnector.obj: HDTConnector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-HDTConnector.obj -MD -MP -MF $(DEPDIR)/hdtconnector_so-HDTConnector.Tpo -c -o hdtconnector_so-HDTConnector.obj `if test -f 'HDTConnector.cpp'; then $(CYGPATH_W) 'HDTConnector.cpp'; else $(CYGPATH_W) '$(srcdir)/HDTConnector.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-HDTConnector.Tpo $(DEPDIR)/hdtconnector_so-HDTConnector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='HDTConnector.cpp' object='hdtconnector_so-HDTConnector.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-DBpediaHDTConnector.obj `if test -f 'DBpediaHDTConnector.cpp'; then $(CYGPATH_W) 'DBpediaHDTConnector.cpp'; else $(CYGPATH_W) '$(srcdir)/DBpediaHDTConnector.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-HDTConnector.obj `if test -f 'HDTConnector.cpp'; then $(CYGPATH_W) 'HDTConnector.cpp'; else $(CYGPATH_W) '$(srcdir)/HDTConnector.cpp'; fi`
 
 hdtconnector_so-ConvertProgress.o: ConvertProgress.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-ConvertProgress.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-ConvertProgress.Tpo -c -o hdtconnector_so-ConvertProgress.o `test -f 'ConvertProgress.cpp' || echo '$(srcdir)/'`ConvertProgress.cpp
@@ -453,20 +450,6 @@ hdtconnector_so-ConvertProgress.obj: ConvertProgress.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-ConvertProgress.obj `if test -f 'ConvertProgress.cpp'; then $(CYGPATH_W) 'ConvertProgress.cpp'; else $(CYGPATH_W) '$(srcdir)/ConvertProgress.cpp'; fi`
 
-hdtconnector_so-DBpediaHDTConnector_wrap.o: DBpediaHDTConnector_wrap.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-DBpediaHDTConnector_wrap.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Tpo -c -o hdtconnector_so-DBpediaHDTConnector_wrap.o `test -f 'DBpediaHDTConnector_wrap.cpp' || echo '$(srcdir)/'`DBpediaHDTConnector_wrap.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Tpo $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='DBpediaHDTConnector_wrap.cpp' object='hdtconnector_so-DBpediaHDTConnector_wrap.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-DBpediaHDTConnector_wrap.o `test -f 'DBpediaHDTConnector_wrap.cpp' || echo '$(srcdir)/'`DBpediaHDTConnector_wrap.cpp
-
-hdtconnector_so-DBpediaHDTConnector_wrap.obj: DBpediaHDTConnector_wrap.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-DBpediaHDTConnector_wrap.obj -MD -MP -MF $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Tpo -c -o hdtconnector_so-DBpediaHDTConnector_wrap.obj `if test -f 'DBpediaHDTConnector_wrap.cpp'; then $(CYGPATH_W) 'DBpediaHDTConnector_wrap.cpp'; else $(CYGPATH_W) '$(srcdir)/DBpediaHDTConnector_wrap.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Tpo $(DEPDIR)/hdtconnector_so-DBpediaHDTConnector_wrap.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='DBpediaHDTConnector_wrap.cpp' object='hdtconnector_so-DBpediaHDTConnector_wrap.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-DBpediaHDTConnector_wrap.obj `if test -f 'DBpediaHDTConnector_wrap.cpp'; then $(CYGPATH_W) 'DBpediaHDTConnector_wrap.cpp'; else $(CYGPATH_W) '$(srcdir)/DBpediaHDTConnector_wrap.cpp'; fi`
-
 hdtconnector_so-HDTIterator.o: HDTIterator.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-HDTIterator.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-HDTIterator.Tpo -c -o hdtconnector_so-HDTIterator.o `test -f 'HDTIterator.cpp' || echo '$(srcdir)/'`HDTIterator.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-HDTIterator.Tpo $(DEPDIR)/hdtconnector_so-HDTIterator.Po
@@ -481,19 +464,19 @@ hdtconnector_so-HDTIterator.obj: HDTIterator.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-HDTIterator.obj `if test -f 'HDTIterator.cpp'; then $(CYGPATH_W) 'HDTIterator.cpp'; else $(CYGPATH_W) '$(srcdir)/HDTIterator.cpp'; fi`
 
-hdtconnector_so-HDTUtilities.o: HDTUtilities.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-HDTUtilities.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-HDTUtilities.Tpo -c -o hdtconnector_so-HDTUtilities.o `test -f 'HDTUtilities.cpp' || echo '$(srcdir)/'`HDTUtilities.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-HDTUtilities.Tpo $(DEPDIR)/hdtconnector_so-HDTUtilities.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='HDTUtilities.cpp' object='hdtconnector_so-HDTUtilities.o' libtool=no @AMDEPBACKSLASH@
+hdtconnector_so-hdtconnector_so.o: hdtconnector_so.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-hdtconnector_so.o -MD -MP -MF $(DEPDIR)/hdtconnector_so-hdtconnector_so.Tpo -c -o hdtconnector_so-hdtconnector_so.o `test -f 'hdtconnector_so.cpp' || echo '$(srcdir)/'`hdtconnector_so.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-hdtconnector_so.Tpo $(DEPDIR)/hdtconnector_so-hdtconnector_so.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hdtconnector_so.cpp' object='hdtconnector_so-hdtconnector_so.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-HDTUtilities.o `test -f 'HDTUtilities.cpp' || echo '$(srcdir)/'`HDTUtilities.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-hdtconnector_so.o `test -f 'hdtconnector_so.cpp' || echo '$(srcdir)/'`hdtconnector_so.cpp
 
-hdtconnector_so-HDTUtilities.obj: HDTUtilities.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-HDTUtilities.obj -MD -MP -MF $(DEPDIR)/hdtconnector_so-HDTUtilities.Tpo -c -o hdtconnector_so-HDTUtilities.obj `if test -f 'HDTUtilities.cpp'; then $(CYGPATH_W) 'HDTUtilities.cpp'; else $(CYGPATH_W) '$(srcdir)/HDTUtilities.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-HDTUtilities.Tpo $(DEPDIR)/hdtconnector_so-HDTUtilities.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='HDTUtilities.cpp' object='hdtconnector_so-HDTUtilities.obj' libtool=no @AMDEPBACKSLASH@
+hdtconnector_so-hdtconnector_so.obj: hdtconnector_so.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hdtconnector_so-hdtconnector_so.obj -MD -MP -MF $(DEPDIR)/hdtconnector_so-hdtconnector_so.Tpo -c -o hdtconnector_so-hdtconnector_so.obj `if test -f 'hdtconnector_so.cpp'; then $(CYGPATH_W) 'hdtconnector_so.cpp'; else $(CYGPATH_W) '$(srcdir)/hdtconnector_so.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hdtconnector_so-hdtconnector_so.Tpo $(DEPDIR)/hdtconnector_so-hdtconnector_so.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hdtconnector_so.cpp' object='hdtconnector_so-hdtconnector_so.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-HDTUtilities.obj `if test -f 'HDTUtilities.cpp'; then $(CYGPATH_W) 'HDTUtilities.cpp'; else $(CYGPATH_W) '$(srcdir)/HDTUtilities.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hdtconnector_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hdtconnector_so-hdtconnector_so.obj `if test -f 'hdtconnector_so.cpp'; then $(CYGPATH_W) 'hdtconnector_so.cpp'; else $(CYGPATH_W) '$(srcdir)/hdtconnector_so.cpp'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

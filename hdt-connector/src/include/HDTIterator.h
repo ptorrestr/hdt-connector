@@ -6,7 +6,7 @@
 
 using namespace std;
 using namespace hdt;
-namespace py = boost::python;
+using namespace boost::python;
 
 class HDTIterator
 {
@@ -18,7 +18,7 @@ public:
 	virtual ~HDTIterator();
 
 	bool has_next();
-	py::list next();
+	boost::python::list next();
 };
 
 #endif 

@@ -2,11 +2,11 @@
 
 // Transform std::vector into python list
 template<class T>
-py::list
+boost::python::list
 std_vector_to_py_list(const std::vector<T>& v)
 {
 	typename std::vector<T>::const_iterator iter;
-	py::list l;
+	boost::python::list l;
 	for (iter = v.begin(); iter!= v.end(); ++iter) {
 		l.append(*iter);
 	}
@@ -15,7 +15,7 @@ std_vector_to_py_list(const std::vector<T>& v)
 
 // Function to transform std::set into python list
 template<class T>
-py::list
+boost::python::list
 std_set_to_py_list(const std::set<T>& v)
 {
 	std::vector<T> u(v.begin(), v.end());
@@ -47,7 +47,7 @@ HDTIterator::has_next()
 	return iter -> hasNext();
 }
 
-py::list
+boost::python::list
 HDTIterator::next()
 {
 	TripleString *ts = iter -> next();

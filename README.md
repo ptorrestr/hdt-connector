@@ -18,15 +18,17 @@ Then build again.
 Usage
 -----
 
-To read a HDT file you must use the object DBpediaHDTConnector. For example:
+To read a HDT file you must use the object HDTConnector and then search. For example:
 ```
 import hdtconnector
-my_file = hdtconnector.DBpediaHDTConnector("my/path.hdt")
+m_map = hdtconnector.HDTConnector("my/path.hdt")
 
-resource = "my res"
-my_file.get_dbpedia_classes_of_res(resource)
+iter = m_map.search("", "", "")
+while iter.has_next():
+  print( iter.next() )
 
 ```
+
 
 
 
