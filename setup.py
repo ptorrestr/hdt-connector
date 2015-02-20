@@ -91,7 +91,7 @@ setup(
     'build' : build_hdtconnector,
     'install' : install_hdtconnector,
   },
-  packages = ['hdt'],
+  packages = ['hdt','hdt.tests','hdtconnector'],
   install_requires = [
     'pyaml >= 13.12.0',
   ],
