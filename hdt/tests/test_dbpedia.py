@@ -14,9 +14,9 @@ class TestDBpedia(unittest.TestCase):
 
   @unittest.skip("Full search on hdt file")
   def test_dbpedia_init(self):
-    it = self.c.search("", "", "")
-    while it.has_next():
-      logger.info(it.next())
+    self.c.search("", "", "")
+    while self.c.has_next():
+      logger.info(self.c.next())
 
   @unittest.skip("Full search on hdt file")
   def test_dbpedia_funcs(self):
