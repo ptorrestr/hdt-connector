@@ -12,32 +12,15 @@ RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 DCTERMS_SUBJ = "http://purl.org/dc/terms/subject";
 
 class DBpedia(object):
-  def __init__(self, hdt_file_path, buffer_size = 1):
+  def __init__(self, hdt_file_path):
     self.hdt = hdtconnector.HDTConnector(hdt_file_path)
-    self.buffer_size = buffer_size
 
   def search(self, uri1, uri2, uri3):
     # If we don't find any tripl, we created an exception
-    self.my_search = self.hdt.search(uri1, uri2, uri3)
-    if not self.my_search.has_next():
+    it = self.hdt.search(uri1, uri2, uri3)
+    if not it.has_next():
       raise Exception("No content found for %s, %s, %s" % (uri1, uri2, uri3) )
-
-  def has_next(self):
-    if not hasattr(self, 'my_search'):
-      raise Exception("You have to define a search first")
-    return self.my_search.has_next()
-
-  def next(self):
-    if not hasattr(self, 'my_search'):
-      raise Exception("You have to define a search first")
-    elements = []
-    for i in range(0, self.buffer_size):
-      if self.my_search.has_next():
-        elements.append(self.my_search.next())
-      else:
-        break
-    return elements
-    
+    return it
 
   def get_definition(self, uri):
     try:
