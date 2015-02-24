@@ -4,7 +4,7 @@ HDTConnector::HDTConnector(const string &hdt_file) : hdt(NULL)
 {
 	try {
 		ConvertProgress prog;
-		hdt = HDTManager::mapHDT(hdt_file.c_str(), &prog);
+		hdt = HDTManager::mapIndexedHDT(hdt_file.c_str(), &prog);
 	}
 	catch (...)
 	{
