@@ -51,10 +51,14 @@ boost::python::list
 HDTIterator::next()
 {
 	TripleString *ts = iter -> next();
-	vector<string> elements;
-	elements.push_back( ts -> getSubject() );
-	elements.push_back( ts -> getPredicate() );
-	elements.push_back( ts -> getObject() );
+	vector<wstring> elements;
+	// TODO: Linux allow unicode string. Find a new way to transform this in other system.
+	string subject = ts -> getSubject();
+	string predicate = ts -> getPredicate();
+	string object = ts -> getObject();
+	elements.push_back( wstring(subject.begin(), subject.end()) );
+	elements.push_back( wstring(predicate.begin(), predicate.end()) );
+	elements.push_back( wstring(object.begin(), object.end()) );
 
 	return std_vector_to_py_list(elements);
 }
