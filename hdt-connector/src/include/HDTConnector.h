@@ -19,7 +19,7 @@ private:
 public:
 	HDTConnector(const string &hdt_file);
 	virtual ~HDTConnector();
-	boost::shared_ptr<HDTIterator> search(const string& uri1, const string& uri2, const string& uri3);
+	boost::shared_ptr<HDTIterator> search(const wstring& uri1, const wstring& uri2, const wstring& uri3);
 };
 
 #endif
