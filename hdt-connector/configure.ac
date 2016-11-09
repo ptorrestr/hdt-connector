@@ -25,6 +25,7 @@ AX_PYTHON_DEVEL([ >= '3.2'])
 # Find boost 
 AX_BOOST_BASE([1.57], [
 ], [AC_MSG_ERROR([Could not find Boost Library])])
+#AX_BOOST_PYTHON
 
 AC_CONFIG_FILES([
   Makefile
