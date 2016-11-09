@@ -19,6 +19,7 @@ depcomp
 install-sh
 ltmain.sh
 m4
+missing
 libtool
 */*/.deps
 */*/.libs
