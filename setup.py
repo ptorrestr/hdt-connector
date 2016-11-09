@@ -1,4 +1,5 @@
 import os
+import sys
 from setuptools import setup
 from setuptools.command.install import install
 from distutils.command.build import build
@@ -6,10 +7,22 @@ import subprocess
 from subprocess import call
 from multiprocessing import cpu_count
 
-hdt_include_path = "/data/shared-files/NEEL2016/scripts/pipeline/hdt-1.1.2/include"
-hdt_libs_path = "/data/shared-files/NEEL2016/scripts/pipeline/hdt-1.1.2/lib"
-boost_include_path = "/data/shared-files/NEEL2016/scripts/pipeline/boost-1.57.0/include"
-boost_libs_path = "/data/shared-files/NEEL2016/scripts/pipeline/boost-1.57.0/lib"
+try:
+  hdt_cflags = os.environ['HDT_CFLAGS']
+except KeyError:
+  hdt_cflags = "/usr/include"
+try:
+  hdt_libs = os.environ['HDT_LIBS']
+except KeyError:
+  hdt_libs = "/usr/lib"
+try:
+  boost_root = os.environ['BOOST_ROOT']
+except KeyError:
+  boost_root = "/usr"
+try:
+  python_version = os.environ['PYTHON_VERSION']
+except KeyError:
+  python_version = str(sys.version_info.major) + "." + str(sys.version_info.minor)
 
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
 HDTCONNECTOR_PATH = os.path.join(BASEPATH, 'hdt-connector')
@@ -21,14 +34,18 @@ class build_hdtconnector(build):
 
     # Configure HDTConnector
     build_path = os.path.abspath(self.build_temp)
-    print(build_path)
+    
+    cmd_autogen = [
+      './autogen.sh',
+    ]
+
     cmd_configure = [
       './configure',
-      'HDT_CFLAGS=-I' + hdt_include_path,
-      'HDT_LIBS=-L' + hdt_libs_path,
-      'boost_CFLAGS=-I' + boost_include_path,
-      'boost_LIBS=-L' + boost_libs_path,
-      '--prefix=' + build_path
+      'HDT_CFLAGS=' + hdt_cflags,
+      'HDT_LIBS=' + hdt_libs,
+      '--with-boost=' + boost_root,
+      'PYTHON_VERSION=' + python_version,
+      '--prefix=' + build_path,
     ]
 
     cmd_make = [
@@ -37,6 +54,11 @@ class build_hdtconnector(build):
       'make && make install'
     ]
     target_files = [os.path.join(build_path, 'bin/hdtconnector.so')]
+
+    def autogen():
+      print('*'*80)
+      call(cmd_autogen, cwd=HDTCONNECTOR_PATH)
+      print('*'*80)
 
     def configure():
       print('*'*80)
@@ -48,11 +70,12 @@ class build_hdtconnector(build):
       call(cmd_make, cwd=HDTCONNECTOR_PATH)
       print('*'*80)
 
+    self.execute(autogen, [], 'generating autotools')
     self.execute(configure, [], 'configuring hdtconnector')
     self.execute(compile, [], 'compiling htdconnector')
     
     # Copy hdt to library build folder
-    self.copy_tree(build_path + "/bin", self.build_lib + "/hdtconnector")
+    self.copy_tree(build_path + "/lib", self.build_lib + "/hdtconnector")
 
 class install_hdtconnector(install):
   def initialize_options(self):
