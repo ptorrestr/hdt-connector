@@ -1,4 +1,4 @@
-# HDT Connector for DBpedia
+# HDT Connector for Python3
 
 ## Development
 
