@@ -1,26 +1,28 @@
-HDT Connector for DBpedia
-=========================
+# HDT Connector for DBpedia
 
-Development
-------------
+## Development
 
 Generate autos.
-``autoreconf --install``
+```./autogen.sh```
 
-Installation
--------------
+Remove Autoconf staff
+```git clean -f -d -x```
 
-* Run configure specifying the PATH for HDT and BOOST libs.
-  ``./configure HDT_CFLAGS=/MY/PATH HDT_LIBS=/MY/PATH boost_CFLAGS=/MY_PATH boost_LIBS=MY_PATH``
-  Example:
-  ``./configure HDT_CFLAGS=-I/home/pablo/workspace/c++/hdt-cpp/hdt-lib/include HDT_LIBS=-L/home/pablo/workspace/c++/hdt-cpp/hdt-lib boost_CFLAGS=-I/opt/usr/local/boost-1.56.0/include boost_LIBS=-L/opt/usr/local/boost-1.56.0/lib --prefix=/tmp/a``
+## Compilation and Installation
+
+* For setting the environment, run `./configure`
+* Some relevant variables:
+  * HDT\_CFLAGS, HDT\_LIBS: Non standard directory for hdt-cpp lib
+  * PYTHON\_VERSION: The python version to use
+  * --with-boost: Non standard boost directory
+  * Example
+  ```./configure HDT_CFLAGS=/MY/PATH HDT_LIBS=/MY/PATH PYTHON_VERSION=3.2 --with-boost=/MY/PATH```
 
 * Run make
-  ``make``
+  ```make && make install```
 
-Execution
-----------
-Run ``python`` in the same folder where ``hdconnector.so`` is stored. Please be aware that ``python`` binary requires that the library paths should be added in ``LD_LIBRARY_PATH`` at the moment of execution. 
+## Execution
+Run ``python`` in the same folder where ``libhdconnector.so`` is stored. Please be aware that ``python`` binary requires that the library paths should be added in ``LD_LIBRARY_PATH`` at the moment of execution. 
 
 Example:
 ``LD_LIBRARY_PATH=/opt/usr/local/boost-1.56.0/lib:/home/pablo/workspace/c++/hdt-cpp/hdt-lib python``
