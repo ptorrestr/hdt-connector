@@ -2,6 +2,7 @@ import os
 from setuptools import setup
 from setuptools.command.install import install
 from distutils.command.build import build
+import subprocess
 from subprocess import call
 from multiprocessing import cpu_count
 
@@ -76,10 +77,27 @@ def readme():
   with open('README.md') as f:
     return f.read()
 
+def version():
+  out = subprocess.Popen(['git','describe','--tags'], stdout = subprocess.PIPE, universal_newlines = True)
+  out.wait()
+  if out.returncode:
+    with open('version') as f:
+      return f.read()
+  else:
+    m_version = out.stdout.read().strip()
+    print(m_version)
+    with open('version', 'w') as f:
+      f.write(m_version)
+    return m_version
+
+def dependencies():
+  with open('dependencies') as f:
+    return f.readlines()
+
 setup(
   name = 'hdtconnector',
-  version = '1.0',
-  description = 'HDT connector for DBpedia',
+  version = version(),
+  description = 'HDT connector',
   long_description = readme(),
   classifiers = [
     'Programming Language :: Python :: 3.4',
@@ -95,9 +113,7 @@ setup(
     'install' : install_hdtconnector,
   },
   packages = ['hdtconnector'],
-  install_requires = [
-    'pyaml >= 13.12.0',
-  ],
+  install_requires = dependencies(),
   test_suite = '',
 )
     

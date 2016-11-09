@@ -637,8 +637,6 @@ LTLIBOBJS
 LIBOBJS
 python_LIBS
 python_CFLAGS
-boost_LIBS
-boost_CFLAGS
 HDT_LIBS
 HDT_CFLAGS
 PKG_CONFIG_LIBDIR
@@ -789,8 +787,6 @@ PKG_CONFIG_PATH
 PKG_CONFIG_LIBDIR
 HDT_CFLAGS
 HDT_LIBS
-boost_CFLAGS
-boost_LIBS
 python_CFLAGS
 python_LIBS'
 
@@ -1447,9 +1443,6 @@ Some influential environment variables:
               path overriding pkg-config's built-in search path
   HDT_CFLAGS  C compiler flags for HDT, overriding pkg-config
   HDT_LIBS    linker flags for HDT, overriding pkg-config
-  boost_CFLAGS
-              C compiler flags for boost, overriding pkg-config
-  boost_LIBS  linker flags for boost, overriding pkg-config
   python_CFLAGS
               C compiler flags for python, overriding pkg-config
   python_LIBS linker flags for python, overriding pkg-config
@@ -15114,6 +15107,123 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 # LIBS path
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for ANSI C header files" >&5
+$as_echo_n "checking for ANSI C header files... " >&6; }
+if ${ac_cv_header_stdc+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+#include <float.h>
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  ac_cv_header_stdc=yes
+else
+  ac_cv_header_stdc=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+if test $ac_cv_header_stdc = yes; then
+  # SunOS 4.x string.h does not declare mem*, contrary to ANSI.
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <string.h>
+
+_ACEOF
+if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+  $EGREP "memchr" >/dev/null 2>&1; then :
+
+else
+  ac_cv_header_stdc=no
+fi
+rm -f conftest*
+
+fi
+
+if test $ac_cv_header_stdc = yes; then
+  # ISC 2.0.2 stdlib.h does not declare free, contrary to ANSI.
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <stdlib.h>
+
+_ACEOF
+if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+  $EGREP "free" >/dev/null 2>&1; then :
+
+else
+  ac_cv_header_stdc=no
+fi
+rm -f conftest*
+
+fi
+
+if test $ac_cv_header_stdc = yes; then
+  # /bin/cc in Irix-4.0.5 gets non-ANSI ctype macros unless using -ansi.
+  if test "$cross_compiling" = yes; then :
+  :
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <ctype.h>
+#include <stdlib.h>
+#if ((' ' & 0x0FF) == 0x020)
+# define ISLOWER(c) ('a' <= (c) && (c) <= 'z')
+# define TOUPPER(c) (ISLOWER(c) ? 'A' + ((c) - 'a') : (c))
+#else
+# define ISLOWER(c) \
+		   (('a' <= (c) && (c) <= 'i') \
+		     || ('j' <= (c) && (c) <= 'r') \
+		     || ('s' <= (c) && (c) <= 'z'))
+# define TOUPPER(c) (ISLOWER(c) ? ((c) | 0x40) : (c))
+#endif
+
+#define XOR(e, f) (((e) && !(f)) || (!(e) && (f)))
+int
+main ()
+{
+  int i;
+  for (i = 0; i < 256; i++)
+    if (XOR (islower (i), ISLOWER (i))
+	|| toupper (i) != TOUPPER (i))
+      return 2;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+
+else
+  ac_cv_header_stdc=no
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+fi
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_header_stdc" >&5
+$as_echo "$ac_cv_header_stdc" >&6; }
+if test $ac_cv_header_stdc = yes; then
+
+$as_echo "#define STDC_HEADERS 1" >>confdefs.h
+
+fi
+
+
+AX_BOOST_BASE(1.57,,) #[AC_MSG_ERROR([Boost was not found in your system])])
+AX_BOOST_SYSTEM
+AX_BOOST_FILESYSTEM
+
 
 
 
@@ -15324,97 +15434,7 @@ else
 $as_echo "yes" >&6; }
 
 fi
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for boost" >&5
-$as_echo_n "checking for boost... " >&6; }
-
-if test -n "$boost_CFLAGS"; then
-    pkg_cv_boost_CFLAGS="$boost_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"boost-1.57\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "boost-1.57") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_boost_CFLAGS=`$PKG_CONFIG --cflags "boost-1.57" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$boost_LIBS"; then
-    pkg_cv_boost_LIBS="$boost_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"boost-1.57\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "boost-1.57") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_boost_LIBS=`$PKG_CONFIG --libs "boost-1.57" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        boost_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "boost-1.57" 2>&1`
-        else
-	        boost_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "boost-1.57" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$boost_PKG_ERRORS" >&5
-
-	as_fn_error $? "Package requirements (boost-1.57) were not met:
-
-$boost_PKG_ERRORS
-
-Consider adjusting the PKG_CONFIG_PATH environment variable if you
-installed software in a non-standard prefix.
-
-Alternatively, you may set the environment variables boost_CFLAGS
-and boost_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details." "$LINENO" 5
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
-is in your PATH or set the PKG_CONFIG environment variable to the full
-path to pkg-config.
-
-Alternatively, you may set the environment variables boost_CFLAGS
-and boost_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details.
-
-To get pkg-config, see <http://pkg-config.freedesktop.org/>.
-See \`config.log' for more details" "$LINENO" 5; }
-else
-	boost_CFLAGS=$pkg_cv_boost_CFLAGS
-	boost_LIBS=$pkg_cv_boost_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-fi
+#PKG_CHECK_MODULES([boost], [boost-1.57])
 
 pkg_failed=no
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for python" >&5
@@ -15624,19 +15644,6 @@ fi
 
 #AC_CHECK_HEADER_STDBOOL
 
-#have_hdt=no
-#AC_SEARCH_LIBS([HDTManager], [hdt], [have_hdt=yes],[have_hdt=no])
-#AC_CHECK_HEADERS([HDTManager.hpp],[have_hdt=yes],[have_hdt=no])
-#if test "x${have_hdt}" = xno; then
-#  echo "------------------------------------------"
-#  echo " The HDT library and header file is       "
-#  echo " required to build the connector.         "
-#  echo " Check 'config.log' for more information. "
-#  echo "------------------------------------------"
-#  (exit 1); exit 1;
-#fi
-
-#AC_CONFIG_MACRO_DIRS([m4])
 ac_config_headers="$ac_config_headers config.h"
 
 ac_config_files="$ac_config_files Makefile src/Makefile"
