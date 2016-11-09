@@ -2,10 +2,10 @@
 #define HDT_CONNECTOR
 
 #include <iostream>
-#include <HDTManager.hpp>
-#include <ConvertProgress.h>
+#include <hdt/HDTManager.hpp>
+#include "ConvertProgress.h"
 #include <boost/python.hpp>
-#include <HDTIterator.h>
+#include "HDTIterator.h"
 
 using namespace std;
 using namespace hdt;

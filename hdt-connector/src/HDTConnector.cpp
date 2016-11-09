@@ -1,4 +1,4 @@
-#include <HDTConnector.h>
+#include "HDTConnector.h"
 
 HDTConnector::HDTConnector(const string &hdt_file) : hdt(NULL)
 {

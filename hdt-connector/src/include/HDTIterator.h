@@ -1,7 +1,7 @@
 #ifndef HDTITERATOR_H
 #define HDTITERATOR_H
 
-#include <HDTManager.hpp>
+#include <hdt/HDTManager.hpp>
 #include <boost/python.hpp>
 
 using namespace std;

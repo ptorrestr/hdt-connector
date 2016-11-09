@@ -5,10 +5,10 @@ from distutils.command.build import build
 from subprocess import call
 from multiprocessing import cpu_count
 
-hdt_include_path = "/home/pablo/workspace/c++/hdt-cpp/hdt-lib/include"
-hdt_libs_path = "/home/pablo/workspace/c++/hdt-cpp/hdt-lib"
-boost_include_path = "/opt/usr/local/boost-1.56.0/include"
-boost_libs_path = "/opt/usr/local/boost-1.56.0/lib"
+hdt_include_path = "/data/shared-files/NEEL2016/scripts/pipeline/hdt-1.1.2/include"
+hdt_libs_path = "/data/shared-files/NEEL2016/scripts/pipeline/hdt-1.1.2/lib"
+boost_include_path = "/data/shared-files/NEEL2016/scripts/pipeline/boost-1.57.0/include"
+boost_libs_path = "/data/shared-files/NEEL2016/scripts/pipeline/boost-1.57.0/lib"
 
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
 HDTCONNECTOR_PATH = os.path.join(BASEPATH, 'hdt-connector')
@@ -20,6 +20,7 @@ class build_hdtconnector(build):
 
     # Configure HDTConnector
     build_path = os.path.abspath(self.build_temp)
+    print(build_path)
     cmd_configure = [
       './configure',
       'HDT_CFLAGS=-I' + hdt_include_path,
@@ -67,6 +68,8 @@ class install_hdtconnector(install):
 
     # Install HDT connector
     print("Installing hdtconnector")
+    print(self.build_lib)
+    print(self.install_lib)
     self.copy_tree(self.build_lib, self.install_lib)
 
 def readme():
@@ -91,10 +94,10 @@ setup(
     'build' : build_hdtconnector,
     'install' : install_hdtconnector,
   },
-  packages = ['hdt','hdt.tests','hdtconnector'],
+  packages = ['hdtconnector'],
   install_requires = [
     'pyaml >= 13.12.0',
   ],
-  test_suite = 'hdt.tests',
+  test_suite = '',
 )
     
