@@ -1,19 +1,25 @@
 AM_CPPFLAGS = \
-	-fPIC -I./include
-	$(HDT_CFLAGS) \
-	$(BOOST_CFLAGS) \
-	$(PYTHON_CFLAGS)
+	-I./include \
+	$(HDT_CPPFLAGS) \
+	$(BOOST_CPPFLAGS) \
+	$(PYTHON_CPPFLAGS)
 
 AM_LDFLAGS = \
-	$(HDT_LIBS)
-	$(BOOST_LDFLAGS)
-	$(PYTHON_LIBS)
+	-L$(HDT_LIBS) \
+	$(BOOST_LDFLAGS) \
+	$(PYTHON_LDFLAGS) \
+	$(PYTHON_EXTRA_LIBS) \
+	$(PYTHON_EXTRA_LDFLAGS)
 
-lib_LTLIBRARIES = libHdtconnector.la
-libHdtconnector_la_LIBADD = \
-	$(BOOST_FILESYSTEM_LIB) \
-	$(BOOST_SYSTEM_LIB)
-	
+lib_LTLIBRARIES = libhdtconnector.la
+libhdtconnector_la_SOURCES = \
+	HDTConnector.cpp \
+	ConvertProgress.cpp \
+	HDTIterator.cpp \
+	hdtconnector_so.cpp
+libhdtconnector_la_LIBADD = \
+	-lz \
+        $(AM_LDFLAGS)	
 
 
 #bin_PROGRAMS = hdtconnector.so

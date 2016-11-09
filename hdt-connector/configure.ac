@@ -1,28 +1,31 @@
+AC_PREREQ(2.65)
+LT_PREREQ([2.4.0])
 AC_INIT([hdtconnector], [1.0], [pablo.torres.t@gmail.com])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
-AC_PROG_CC
-AC_PROG_CXX
-AM_PROG_AR
-LT_INIT # libraries
 
-# LIBS path
 AC_CONFIG_MACRO_DIR([m4])
-AC_HEADER_STDC
-
-AX_BOOST_BASE([1.57],,) #[AC_MSG_ERROR([Boost was not found in your system])])
-AX_BOOST_SYSTEM
-AX_BOOST_FILESYSTEM
-PKG_CHECK_MODULES([HDT], [hdt-1.0])
-#PKG_CHECK_MODULES([boost], [boost-1.57])
-PKG_CHECK_MODULES([python], [python])
-AC_SUBST([HDT_CFLAGS])
-AC_SUBST([HDT_LIBS])
-
-# Check for header files
-AC_HEADER_STDC
-#AC_CHECK_HEADER_STDBOOL
-
 AC_CONFIG_HEADERS([config.h])
+
+AM_INIT_AUTOMAKE([1.11 foreign])
+
+AC_PROG_CXX # Define CXX compiler
+AC_LANG_CPLUSPLUS # Define CXX for test
+AM_PROG_AR # Define AR (archiver)
+LT_INIT([shared static]) # Must be called after CXX AR
+
+# Find HDT 
+PKG_CHECK_MODULES([HDT], [hdt-1.0],[
+  CPPFLAGS="-I$HDT_CFLAGS $CPPFLAGS "
+  LDFLAGS="-L$HDT_LIBS $LDFLAGS "
+])
+AC_CHECK_HEADERS([hdt/HDT.hpp], [], [AC_MSG_ERROR([Could not find HDT.hpp])])
+
+# Find Python
+AX_PYTHON_DEVEL([ >= '3.2'])
+
+# Find boost 
+AX_BOOST_BASE([1.57], [
+], [AC_MSG_ERROR([Could not find Boost Library])])
+
 AC_CONFIG_FILES([
   Makefile
   src/Makefile

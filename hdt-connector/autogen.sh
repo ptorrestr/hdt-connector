@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
-
-aclocal -I m4 --install
-autoreconf --install --force
+#!/bin/sh
+mkdir -p m4
+libtoolize --force
+aclocal
+autoheader
+automake --add-missing
+autoconf
