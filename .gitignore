@@ -6,9 +6,19 @@
 
 # C++ Configure and Make
 Makefile
+Makefile.in
+aclocal.m4
+ar-lib
+compile
+config.h.in
 config.h
 config.log
 config.status
+configure
+depcomp
+install-sh
+ltmain.sh
+m4
 libtool
 */*/.deps
 */*/.libs
