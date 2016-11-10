@@ -2,6 +2,8 @@ from __future__ import division, absolute_import, print_function
 from ctypes import RTLD_GLOBAL
 import sys
 
+##TODO: Improve the import of the library
+
 def dl_import(import_expr):
     """Import module according to import_expr, but with RTLD_GLOBAL enabled."""
     # we need to get the locals and globals of the _calling_ function. Thus, we
@@ -23,4 +25,4 @@ def dl_import(import_expr):
                                                # avoid unnecessary symbol
                                                # collision
 
-dl_import("from . import libhdtconnector as core")
+#dl_import("from . import libhdtconnector as core")
