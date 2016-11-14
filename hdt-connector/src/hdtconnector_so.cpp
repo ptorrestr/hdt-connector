@@ -15,6 +15,7 @@ BOOST_PYTHON_MODULE(libhdtconnector)
 		.def("has_next", &HDTIterator::has_next)
 		.def("next", &HDTIterator::next)
 	;
+	register_ptr_to_python< boost::shared_ptr<HDTIterator> >();
 	
 	class_<HDTConnector, boost::shared_ptr<HDTConnector> >("HDTConnector", init<string>())
 		.def("__init__", make_constructor(makeClass))
