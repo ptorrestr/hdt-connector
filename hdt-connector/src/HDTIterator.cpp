@@ -51,21 +51,23 @@ boost::python::list
 HDTIterator::next()
 {
 	TripleString *ts = iter -> next();
-	vector<boost::python::object> elements;
-	// TODO: check for python3.
-	string subject = ts -> getSubject();
-	string predicate = ts -> getPredicate();
-	string object = ts -> getObject();
-	PyObject *py_subject =PyUnicode_FromString(subject.c_str() );
-	PyObject *py_predicate = PyUnicode_FromString(predicate.c_str() );
-	PyObject *py_object = PyUnicode_FromString(object.c_str() );
-        boost::python::object o1(boost::python::handle<>((PyObject*)py_subject));
-	boost::python::object o2(boost::python::handle<>((PyObject*)py_predicate));
-	boost::python::object o3(boost::python::handle<>((PyObject*)py_object));
 	boost::python::list py_list;
-	py_list.append(o1);
-	py_list.append(o2);
-	py_list.append(o3);
-
+	if ( ts ) //Iterator has next element
+	{
+		vector<boost::python::object> elements;
+		string subject = ts -> getSubject();
+		string predicate = ts -> getPredicate();
+		string object = ts -> getObject();
+		PyObject *py_subject = PyUnicode_FromString(subject.c_str() );
+		PyObject *py_predicate = PyUnicode_FromString(predicate.c_str() );
+		PyObject *py_object = PyUnicode_FromString(object.c_str() );
+        	boost::python::object o1(boost::python::handle<>((PyObject*)py_subject));
+		boost::python::object o2(boost::python::handle<>((PyObject*)py_predicate));
+		boost::python::object o3(boost::python::handle<>((PyObject*)py_object));
+		boost::python::list py_list;
+		py_list.append(o1);
+		py_list.append(o2);
+		py_list.append(o3);
+	}
 	return py_list;
 }
