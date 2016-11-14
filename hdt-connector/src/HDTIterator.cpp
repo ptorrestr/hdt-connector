@@ -50,10 +50,10 @@ HDTIterator::has_next()
 boost::python::list
 HDTIterator::next()
 {
-	TripleString *ts = iter -> next();
 	boost::python::list py_list;
-	if ( ts ) //Iterator has next element
+	if ( iter->hasNext() ) //Iterator has next element
 	{
+		TripleString *ts = iter -> next();
 		vector<boost::python::object> elements;
 		string subject = ts -> getSubject();
 		string predicate = ts -> getPredicate();
@@ -64,7 +64,6 @@ HDTIterator::next()
         	boost::python::object o1(boost::python::handle<>((PyObject*)py_subject));
 		boost::python::object o2(boost::python::handle<>((PyObject*)py_predicate));
 		boost::python::object o3(boost::python::handle<>((PyObject*)py_object));
-		boost::python::list py_list;
 		py_list.append(o1);
 		py_list.append(o2);
 		py_list.append(o3);
