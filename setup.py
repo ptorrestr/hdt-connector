@@ -1,5 +1,6 @@
 import os
 import sys
+import platform
 from setuptools import setup
 from setuptools.command.install import install
 from distutils.command.build import build
@@ -53,7 +54,17 @@ class build_hdtconnector(build):
       '-c',
       'make && make install'
     ]
-    target_files = [os.path.join(build_path, 'bin/hdtconnector.so')]
+
+    library_extension = ".so"
+    if platform.system() == "Darwin":
+      library_extension = ".dylib" 
+
+    cmd_symlink = [
+      'ln',
+      '-s',
+      'libhdtconnector' + library_extension,
+      'libhdtconnector.so'
+    ]
 
     def autogen():
       print('*'*80)
@@ -70,9 +81,16 @@ class build_hdtconnector(build):
       call(cmd_make, cwd=HDTCONNECTOR_PATH)
       print('*'*80)
 
+    def symlink():
+      print('*'*80)
+      call(cmd_symlink, cwd=build_path + "/lib")
+      print('*'*80)
+
     self.execute(autogen, [], 'generating autotools')
     self.execute(configure, [], 'configuring hdtconnector')
     self.execute(compile, [], 'compiling htdconnector')
+    if platform.system() == "Darwin":
+      self.execute(symlink, [], 'adding symlink for htdconnector')
     
     # Copy hdt to library build folder
     self.copy_tree(build_path + "/lib", self.build_lib + "/hdtconnector")
