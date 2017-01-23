@@ -1,0 +1,11 @@
+name: hdtconnector-test
+channels:
+  - ptorrestr
+  - conda-forge
+  - salford_systems
+  - pkgw
+dependencies:
+  - python=3.5
+  - setuptools
+  - pyyaml
+  - pytest

@@ -1,0 +1,35 @@
+package:
+  name: hdtconnector
+  version: {{ GIT_DESCRIBE_TAG }}
+build:
+  number: {{ GIT_DESCRIBE_NUMBER }}
+source:
+  git_url: ../
+requirements:
+  build:
+    - python
+    - setuptools
+    - boost1-gcc5
+    - zlib
+    - bzip2
+    - gcc-5         #[not osx]
+    - llvm          #[osx]
+    - hdtcpp
+  run:
+    - python
+    - boost1-gcc5
+    - zlib
+    - bzip2
+    - libgcc-5      #[not osx]
+    - hdtcpp
+test:
+  source_files:
+    - etc
+    - hdtconnector/tests
+  requires:
+    - pytest
+  commands:
+    - pytest
+about:
+  home: https://github.com/ptorrestr/hdtconnector
+  license: GPLv3
