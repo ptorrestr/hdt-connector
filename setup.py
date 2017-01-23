@@ -121,19 +121,13 @@ def readme():
 def version():
   out = subprocess.Popen(['git','describe','--tags'], stdout = subprocess.PIPE, universal_newlines = True)
   out.wait()
-  if out.returncode:
-    with open('version') as f:
-      return f.read()
-  else:
+  if out.returncode == 0:
     m_version = out.stdout.read().strip()
-    print(m_version)
-    with open('version', 'w') as f:
-      f.write(m_version)
-    return m_version
-
-def dependencies():
-  with open('dependencies') as f:
-    return f.readlines()
+    version = m_version.split("-")
+    if len(version) > 0:
+      print(version[0])
+      return version[0]
+  return "0.0.1" #default version
 
 setup(
   name = 'hdtconnector',
@@ -141,7 +135,7 @@ setup(
   description = 'HDT connector',
   long_description = readme(),
   classifiers = [
-    'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.5',
     'Programming Language :: C++',
   ],
   url = 'http://github.com/ptorrestr/hdt-connector',
@@ -154,7 +148,6 @@ setup(
     'install' : install_hdtconnector,
   },
   packages = ['hdtconnector'],
-  install_requires = dependencies(),
   test_suite = '',
 )
     
