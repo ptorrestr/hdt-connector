@@ -3,6 +3,20 @@ HDT Connector
 
 This is a python module to process HDT files.
 
+## Local testing
+
+```
+conda-env create --file .conda/environment.yaml
+source activate hdtconnector-test
+pytest
+```
+
+## Build locally with Conda
+```
+conda build .conda/
+```
+
+
 Installation
 ------------
 
