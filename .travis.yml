@@ -6,15 +6,14 @@ cache:
 matrix:
   include:
     - os: linux
-      dist: trusty
       python: 3.5
     - os: osx
       language: objective-c
       env: TRAVIS_PYTHON_VERSION=3.5 
 install:
+  - dpkg -l | grep libc6
   - source .travis/install.sh
 script:
-  - dpkg -l | grep libc6
   - .travis/script.sh
 after_success:
   - .travis/after_success.sh
