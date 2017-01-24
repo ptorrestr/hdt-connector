@@ -13,6 +13,7 @@ requirements:
     - zlib
     - bzip2
     - gcc-5         #[not osx]
+    - binutils      #[not osx]
     - llvm          #[osx]
     - hdtcpp
   run:
