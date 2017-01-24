@@ -9,3 +9,9 @@ dependencies:
   - setuptools
   - pyyaml
   - pytest
+  - boost1-gcc5
+  - zlib
+  - bzip2
+  - gcc-5         #[not osx]
+  - llvm          #[osx]
+  - hdtcpp
