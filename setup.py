@@ -88,7 +88,7 @@ class build_hdtconnector(build):
 
     self.execute(autogen, [], 'generating autotools')
     self.execute(configure, [], 'configuring hdtconnector')
-    self.execute("cat libhdtconnector/config.log")
+    self.execute("cat libhdtconnector/config.log", [], 'cat')
     self.execute(compile, [], 'compiling htdconnector')
     if platform.system() == "Darwin":
       self.execute(symlink, [], 'adding symlink for htdconnector')
