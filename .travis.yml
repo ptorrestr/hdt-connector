@@ -11,8 +11,7 @@ matrix:
       language: objective-c
       env: TRAVIS_PYTHON_VERSION=3.5 
 install:
-  - dpkg -l | grep libc6
-  - source .travis/install.sh
+  - .travis/install.sh
 script:
   - .travis/script.sh
 after_success:

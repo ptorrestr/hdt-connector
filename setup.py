@@ -26,7 +26,7 @@ except KeyError:
   python_version = str(sys.version_info.major) + "." + str(sys.version_info.minor)
 
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
-HDTCONNECTOR_PATH = os.path.join(BASEPATH, 'hdt-connector')
+HDTCONNECTOR_PATH = os.path.join(BASEPATH, 'libhdtconnector')
 
 class build_hdtconnector(build):
   def run(self):
