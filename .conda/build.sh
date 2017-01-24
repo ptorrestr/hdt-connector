@@ -31,6 +31,5 @@ if [ "$(uname)" == "Linux" ]; then
 		CXX=${PREFIX}/bin/g++ \
 	  CC=${PREFIX}/bin/gcc \
     python setup.py install
-	cat libhdtconnector/config.log
   unlink ${PREFIX}/lib64
 fi
