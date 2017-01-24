@@ -31,4 +31,5 @@ conda config --get channels
 conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
 conda install conda-build anaconda-client
 source activate test-environment
+ls -la
 conda build .conda/ --no-test --no-anaconda-upload
