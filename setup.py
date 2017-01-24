@@ -88,7 +88,7 @@ class build_hdtconnector(build):
 
     def cat():
       print('*'*80)
-      call(["cat libhdtconnector/config.log"], cwd=HDTCONNECTOR_PATH)
+      call(["ls -la "], cwd=HDTCONNECTOR_PATH)
       print('*'*80)
 
     self.execute(autogen, [], 'generating autotools')
