@@ -23,6 +23,7 @@ fi
 
 if [ "$(uname)" == "Linux" ]; then
   ln -s ${PREFIX}/lib ${PREFIX}/lib64
+	${PREFIX}/bin/g++ -v
   HDT_CFLAGS=${PREFIX}/include \
     HDT_LIBS=${PREFIX}/lib \
     BOOST_ROOT=${PREFIX} \
