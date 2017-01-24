@@ -21,7 +21,7 @@ AM_SILENT_RULES([yes]) # Silent bulding
 LT_INIT([shared static]) # Must be called after CXX AR
 
 # Force CXX11
-AX_CXX_COMPILE_STDCXX([11],[ext],[mandatory])
+AX_CXX_COMPILE_STDCXX([11],[],[mandatory])
 
 # Find HDT 
 PKG_CHECK_MODULES([HDT], [hdt-1.0],[
