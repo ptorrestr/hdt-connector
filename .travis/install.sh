@@ -2,7 +2,6 @@
 
 set -x -e
 
-
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 	rvm get stable # We need this since there is a bug in osx. See https://github.com/travis-ci/travis-ci/issues/6307
 	os="MacOSX"
@@ -31,5 +30,4 @@ conda config --get channels
 conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
 conda install conda-build anaconda-client
 source activate test-environment
-ls -la
 conda build .conda/ --no-test --no-anaconda-upload

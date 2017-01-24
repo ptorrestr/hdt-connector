@@ -14,5 +14,7 @@ install:
   - .travis/install.sh
 script:
   - .travis/script.sh
+after_failure:
+  - .travis/after_failure.sh
 after_success:
   - .travis/after_success.sh
