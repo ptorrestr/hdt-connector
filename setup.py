@@ -73,6 +73,7 @@ class build_hdtconnector(build):
 
     def configure():
       print('*'*80)
+      print(cmd_configure)
       call(cmd_configure, cwd=HDTCONNECTOR_PATH)
       print('*'*80)
 
