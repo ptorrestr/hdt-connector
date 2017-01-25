@@ -28,8 +28,8 @@ if [ "$(uname)" == "Linux" ]; then
     HDT_LIBS=${PREFIX}/lib \
     BOOST_ROOT=${PREFIX} \
     PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
-		CXX=g++ \
-	  CC=gcc \
+		CXX=${CXX:-g++} \
+	  CC=${CC:-gcc} \
     python setup.py install
   unlink ${PREFIX}/lib64
 fi

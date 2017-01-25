@@ -12,6 +12,9 @@ matrix:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-4.9']
+      env: 
+        - CXX=g++-4.9
+        - CC=gcc-4.9
     - os: osx
       language: objective-c
       env: TRAVIS_PYTHON_VERSION=3.5 
