@@ -29,9 +29,7 @@ test:
   requires:
     - pytest
   commands:
-    - folder=$(pwd)/../_t_env
-    - DYLD_LIBRARY_PATH=$folder/lib otool -L $folder/lib/python3.5/site-packages/hdtconnector/libhdtconnector.so
-    - DYLD_PRINT_LIBRARIES=1 DYLD_LIBRARY_PATH=$folder/lib pytest
+    - pytest
 about:
   home: https://github.com/ptorrestr/hdtconnector
   license: GPLv3
