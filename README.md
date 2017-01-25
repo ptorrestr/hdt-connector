@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ptorrestr/hdt-connector.svg?branch=master)](https://travis-ci.org/ptorrestr/hdt-connector)
+
 HDT Connector
 =============
 
