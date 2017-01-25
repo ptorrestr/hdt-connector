@@ -9,19 +9,13 @@ requirements:
   build:
     - python
     - setuptools
-    - boost1-gcc5
     - zlib
     - bzip2
-    - gcc-5         #[not osx]
-    - binutils      #[not osx]
-    - llvm          #[osx]
     - hdtcpp
   run:
     - python
-    - boost1-gcc5
     - zlib
     - bzip2
-    - libgcc-5      #[not osx]
     - hdtcpp
 test:
   source_files:
@@ -30,7 +24,9 @@ test:
   requires:
     - pytest
   commands:
-    - pytest
+    - folder=$(pwd)/../_t_env
+    - DYLD_LIBRARY_PATH=$folder/lib otool -L $folder/lib/python3.5/site-packages/hdtconnector/libhdtconnector.so
+    - DYLD_PRINT_LIBRARIES=1 DYLD_LIBRARY_PATH=$folder/lib pytest
 about:
   home: https://github.com/ptorrestr/hdtconnector
   license: GPLv3
