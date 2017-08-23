@@ -14,13 +14,13 @@ matrix:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-4.9']
-      env: 
-        - CXX=g++-4.9
-        - CC=gcc-4.9
+      env:
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9" 
     - os: osx
       env:
-        - CXX=clang++
-        - CC=clang
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+before_install:
+  - eval "${MATRIX_EVAL}"
 install:
   - .travis/install.sh
 script:

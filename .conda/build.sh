@@ -16,8 +16,8 @@ if [ "$(uname)" == "Darwin" ]; then
   HDT_CFLAGS=${PREFIX}/include \
     HDT_LIBS=${PREFIX}/lib \
     BOOST_ROOT=${PREFIX} \
-    CXX=llvm-g++ \
-    CC=llvm-gcc \
+    CXX=${CXX:-llvm-g++} \
+    CC=${CC:-llvm-gcc} \
     $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi
