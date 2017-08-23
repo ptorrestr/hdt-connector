@@ -18,7 +18,7 @@ if [ "$(uname)" == "Darwin" ]; then
     BOOST_ROOT=${PREFIX} \
     CXX=llvm-g++ \
     CC=llvm-gcc \
-    python setup.py install
+    $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi
 
@@ -31,6 +31,6 @@ if [ "$(uname)" == "Linux" ]; then
     PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
     CXX=${CXX:-g++} \
     CC=${CC:-gcc} \
-    python setup.py install
+    $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi

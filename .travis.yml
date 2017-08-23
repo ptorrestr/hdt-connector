@@ -3,6 +3,9 @@ cache:
   directories:
     - "$HOME/.cache/pip"
     - "$HOME/.pyenv"
+env:
+  global:
+    - CONDA_PY=35
 matrix:
   include:
     - os: linux
