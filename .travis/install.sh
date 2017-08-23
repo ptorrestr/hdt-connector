@@ -26,4 +26,6 @@ conda config --add channels conda-forge
 conda config --add channels ptorrestr
 conda config --get channels
 conda install conda-build anaconda-client
+conda update -n root conda-build
+
 conda build .conda/ --no-test --no-anaconda-upload
