@@ -3,16 +3,16 @@
 set -x -e
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-	rvm get stable # We need this since there is a bug in osx. See https://github.com/travis-ci/travis-ci/issues/6307
-	os="MacOSX"
+  rvm get stable # We need this since there is a bug in osx. See https://github.com/travis-ci/travis-ci/issues/6307
+  os="MacOSX"
 else
-	os="Linux"
+  os="Linux"
 fi
 
 if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-	python_v="2"
+  python_v="2"
 else
-	python_v="3"
+  python_v="3"
 fi
 wget "https://repo.continuum.io/miniconda/Miniconda${python_v}-latest-${os}-x86_64.sh" -O miniconda.sh;
 bash miniconda.sh -b -p $HOME/miniconda
