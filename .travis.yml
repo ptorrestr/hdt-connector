@@ -1,4 +1,4 @@
-language: python
+language: cpp
 cache:
   directories:
     - "$HOME/.cache/pip"
@@ -6,11 +6,10 @@ cache:
 env:
   global:
     - CONDA_PY=35
+    - TRAVIS_PYTHON_VERSION=3.5
 matrix:
   include:
     - os: linux
-      python: 3.5
-      compiler: gcc
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
@@ -19,8 +18,9 @@ matrix:
         - CXX=g++-4.9
         - CC=gcc-4.9
     - os: osx
-      language: objective-c
-      env: TRAVIS_PYTHON_VERSION=3.5 
+      env:
+        - CXX=clang++
+        - CC=clang
 install:
   - .travis/install.sh
 script:
