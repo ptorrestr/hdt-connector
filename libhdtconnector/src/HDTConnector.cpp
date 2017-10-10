@@ -21,13 +21,13 @@ HDTConnector::~HDTConnector()
 	}
 }
 
-boost::shared_ptr<HDTIterator>
+shared_ptr<HDTIterator>
 HDTConnector::search(const wstring& w_uri1, const wstring& w_uri2, const wstring& w_uri3)
 {
 	const string uri1( w_uri1.begin(), w_uri1.end() );
 	const string uri2( w_uri2.begin(), w_uri2.end() );
 	const string uri3( w_uri3.begin(), w_uri3.end() );
 	IteratorTripleString *iter = hdt -> search(uri1.c_str(), uri2.c_str(), uri3.c_str());
-	return boost::shared_ptr<HDTIterator>(new HDTIterator(iter));
+	return shared_ptr<HDTIterator>(new HDTIterator(iter));
 }
 

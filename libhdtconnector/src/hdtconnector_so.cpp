@@ -2,23 +2,24 @@
 #include "HDTConnector.h"
 #include "HDTIterator.h"
 
+using namespace std;
 using namespace boost::python;
 
-static boost::shared_ptr<HDTConnector> makeClass(const string &val)
+static shared_ptr<HDTConnector> init_from_c_string(const string &val)
 {
-	return boost::shared_ptr<HDTConnector>(new HDTConnector(val));
+	return shared_ptr<HDTConnector>(new HDTConnector(val));
 }
 
 BOOST_PYTHON_MODULE(libhdtconnector)
 {
-	class_<HDTIterator, boost::shared_ptr<HDTIterator> >("HDTIterator", init<IteratorTripleString *>())
+	class_<HDTIterator, shared_ptr<HDTIterator> >("HDTIterator", init<IteratorTripleString *>())
 		.def("has_next", &HDTIterator::has_next)
 		.def("next", &HDTIterator::next)
 	;
-	register_ptr_to_python< boost::shared_ptr<HDTIterator> >();
+	register_ptr_to_python< shared_ptr<HDTIterator> >();
 	
-	class_<HDTConnector, boost::shared_ptr<HDTConnector> >("HDTConnector", init<string>())
-		.def("__init__", make_constructor(makeClass))
+	class_<HDTConnector, shared_ptr<HDTConnector> >("HDTConnector", no_init)
+		.def("__init__", make_constructor(&init_from_c_string))
 		.def("search", &HDTConnector::search)
 	;
 }

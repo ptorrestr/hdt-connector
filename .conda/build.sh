@@ -16,6 +16,7 @@ if [ "$(uname)" == "Darwin" ]; then
   PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
     CXX=${CXX:-llvm-g++} \
     CC=${CC:-llvm-gcc} \
+    BOOST_ROOT=${PREFIX} \
     $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi
@@ -25,6 +26,7 @@ if [ "$(uname)" == "Linux" ]; then
   PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
     CXX=${CXX:-g++} \
     CC=${CC:-gcc} \
+    BOOST_ROOT=${PREFIX} \
     $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi
