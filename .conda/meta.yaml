@@ -4,6 +4,9 @@ package:
   version: {{ GIT_DESCRIBE_TAG }}
 build:
   number: {{ GIT_DESCRIBE_NUMBER }}
+  script_env:
+    - CC
+    - CXX
 source:
   path: ../
 requirements:
