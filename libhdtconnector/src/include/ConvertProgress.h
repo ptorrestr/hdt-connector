@@ -1,7 +1,7 @@
 #ifndef CONVERT_PROGRESS_H
 #define CONVERT_PROGRESS_H
 
-#include <hdt/HDTManager.hpp>
+#include <HDTManager.hpp>
 #include <iostream>
 
 using namespace hdt;

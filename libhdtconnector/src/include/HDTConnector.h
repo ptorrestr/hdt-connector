@@ -2,7 +2,7 @@
 #define HDT_CONNECTOR
 
 #include <iostream>
-#include <hdt/HDTManager.hpp>
+#include <HDTManager.hpp>
 #include "ConvertProgress.h"
 #include <boost/python.hpp>
 #include "HDTIterator.h"

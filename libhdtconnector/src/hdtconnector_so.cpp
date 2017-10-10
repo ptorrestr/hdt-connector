@@ -1,6 +1,6 @@
 #include <boost/python.hpp>
-#include <HDTConnector.h>
-#include <HDTIterator.h>
+#include "HDTConnector.h"
+#include "HDTIterator.h"
 
 using namespace boost::python;
 
