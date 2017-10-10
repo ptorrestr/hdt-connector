@@ -24,11 +24,11 @@ LT_INIT([shared static]) # Must be called after CXX AR
 AX_CXX_COMPILE_STDCXX([11],[],[mandatory])
 
 # Find HDT 
-PKG_CHECK_MODULES([HDT], [hdt-1.0],[
-  CPPFLAGS="-I$HDT_CFLAGS $CPPFLAGS"
-  LIBS="-L$HDT_LIBS $LIBS"
+PKG_CHECK_MODULES([HDT], [hdt],[
+  CPPFLAGS="$HDT_CFLAGS $CPPFLAGS"
+  LIBS="$HDT_LIBS $LIBS"
 ])
-AC_CHECK_HEADERS([hdt/HDT.hpp], [], 
+AC_CHECK_HEADERS([HDT.hpp], [], 
   AC_MSG_ERROR([Could not find HDT.hpp]))
 
 # Find Python
