@@ -8,7 +8,7 @@ build:
     - CC
     - CXX
 source:
-  git_url: ../
+  path: ../
 requirements:
   build:
     - python
