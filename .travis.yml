@@ -3,9 +3,6 @@ cache:
   directories:
     - "$HOME/.cache/pip"
     - "$HOME/.pyenv"
-env:
-  global:
-    - TRAVIS_PYTHON_VERSION=3.5
 matrix:
   include:
     - os: linux
@@ -14,20 +11,20 @@ matrix:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-4.9']
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && CONDA_PY=35"
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && export CONDA_PY=35"
     - os: linux
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-4.9']
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && CONDA_PY=36" 
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && export CONDA_PY=36" 
     - os: osx
       env:
-        - MATRIX_EVAL="CONDA_PY=35"
+        - MATRIX_EVAL="export CONDA_PY=35"
     - os: osx
       env:
-        - MATRIX_EVAL="CONDA_PY=36"
+        - MATRIX_EVAL="export CONDA_PY=36"
 before_install:
   - eval "${MATRIX_EVAL}"
 install:
