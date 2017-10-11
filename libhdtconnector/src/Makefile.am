@@ -6,6 +6,7 @@ libhdtconnector_la_CPPFLAGS = \
         $(PYTHON_CPPFLAGS) 
 
 libhdtconnector_la_SOURCES = \
+	HDTTriple.cpp \
 	HDTConnector.cpp \
 	ConvertProgress.cpp \
 	HDTIterator.cpp \

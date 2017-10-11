@@ -2,6 +2,7 @@
 #define HDT_CONNECTOR
 
 #include <iostream>
+#include <memory>
 #include <HDTManager.hpp>
 #include "ConvertProgress.h"
 #include "HDTIterator.h"
