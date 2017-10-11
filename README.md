@@ -50,7 +50,10 @@ while iter.has_next():
 resource = "some interesting resource"
 iter = m_map.search(resource, "", "")
 while iter.has_next():
-  print( iter.next() )
+  elem = iter.next()
+  print( elem.get_subject() )
+  print( elem.get_object() )
+  print( elem.get_predicate() )
 
 ```
 
