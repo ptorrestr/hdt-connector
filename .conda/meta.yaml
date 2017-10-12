@@ -1,5 +1,6 @@
+{% set name = "hdtconnector" %}
 package:
-  name: hdtconnector
+  name: {{ name | lower }}
   version: {{ GIT_DESCRIBE_TAG }}
 build:
   number: {{ GIT_DESCRIBE_NUMBER }}
@@ -12,14 +13,10 @@ requirements:
   build:
     - python
     - setuptools
-    - zlib
-    - bzip2
     - hdtcpp
     - boost
   run:
     - python
-    - zlib
-    - bzip2
     - hdtcpp
     - boost
 test:

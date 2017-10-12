@@ -8,22 +8,13 @@ import subprocess
 from subprocess import call
 from multiprocessing import cpu_count
 
-try:
-  hdt_cflags = os.environ['HDT_CFLAGS']
-except KeyError:
-  hdt_cflags = "/usr/include"
-try:
-  hdt_libs = os.environ['HDT_LIBS']
-except KeyError:
-  hdt_libs = "/usr/lib"
+# Flags suchas HDT_CLFAGS or PKG_CONFIG_PATH are inhereted by subprocess.
+# If you need to define them, do it when calling python setup.py
+
 try:
   boost_root = os.environ['BOOST_ROOT']
 except KeyError:
   boost_root = "/usr"
-try:
-  python_version = os.environ['PYTHON_VERSION']
-except KeyError:
-  python_version = str(sys.version_info.major) + "." + str(sys.version_info.minor)
 
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
 HDTCONNECTOR_PATH = os.path.join(BASEPATH, 'libhdtconnector')
@@ -42,11 +33,8 @@ class build_hdtconnector(build):
 
     cmd_configure = [
       './configure',
-      'HDT_CFLAGS=' + hdt_cflags,
-      'HDT_LIBS=' + hdt_libs,
-      '--with-boost=' + boost_root,
-      'PYTHON_VERSION=' + python_version,
       '--prefix=' + build_path,
+      '--with-boost=' + boost_root,
     ]
 
     cmd_make = [

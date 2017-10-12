@@ -1,8 +1,10 @@
 #ifndef HDTITERATOR_H
 #define HDTITERATOR_H
 
-#include <hdt/HDTManager.hpp>
+#include <HDTManager.hpp>
 #include <boost/python.hpp>
+#include <memory>
+#include "HDTTriple.h"
 
 using namespace std;
 using namespace hdt;
@@ -18,7 +20,7 @@ public:
 	virtual ~HDTIterator();
 
 	bool has_next();
-	boost::python::list next();
+	shared_ptr<HDTTriple> next();
 };
 
 #endif 

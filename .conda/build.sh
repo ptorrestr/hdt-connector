@@ -13,24 +13,20 @@ if [ "$(uname)" == "Darwin" ]; then
   LINKFLAGS="-mmacosx-version-min=${MACOSX_VERSION_MIN}"
   LINKFLAGS="${LINKFLAGS} -stdlib=libc++ -L${LIBRARY_PATH}"
 
-  HDT_CFLAGS=${PREFIX}/include \
-    HDT_LIBS=${PREFIX}/lib \
-    BOOST_ROOT=${PREFIX} \
+  PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
     CXX=${CXX:-llvm-g++} \
     CC=${CC:-llvm-gcc} \
+    BOOST_ROOT=${PREFIX} \
     $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi
 
 if [ "$(uname)" == "Linux" ]; then
   ln -s ${PREFIX}/lib ${PREFIX}/lib64
-  echo $CXX
-  HDT_CFLAGS=${PREFIX}/include \
-    HDT_LIBS=${PREFIX}/lib \
-    BOOST_ROOT=${PREFIX} \
-    PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
+  PKG_CONFIG_PATH="${PKG_CONFIG_PATH}" \
     CXX=${CXX:-g++} \
     CC=${CC:-gcc} \
+    BOOST_ROOT=${PREFIX} \
     $PYTHON setup.py install
   unlink ${PREFIX}/lib64
 fi
