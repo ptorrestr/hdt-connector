@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/ptorrestr/hdt-connector.svg?branch=master)](https://travis-ci.org/ptorrestr/hdt-connector)
 
-HDT Connector
+HDT Python Connector
 =============
 
-This is a python module to process HDT files.
+This is a python module for reading HDT files.
 
 ## Local testing
 
@@ -35,7 +35,7 @@ Then build again.
 Usage
 -----
 
-To read a HDT file you must use the object HDTConnector and then create a search. Each searching will create an iterator over the collection. For example:
+For reading a HDT file you must use `HDTConnector` object from which you can do a search. Each search will return an iterator with the matching triples. For example:
 
 ```
 from hdtconnector.libhdtconnector import HDTConnector
@@ -44,7 +44,7 @@ m_map = HDTConnector("my/path.hdt")
 # All the collection
 iter = m_map.search("", "", "")
 while iter.has_next():
-  print( iter.next() )
+  print( iter.next().get_subject() )
 
 # Specific subset
 resource = "some interesting resource"
