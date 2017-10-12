@@ -37,7 +37,7 @@ Usage
 
 For reading a HDT file you must use `HDTConnector` object from which you can do a search. Each search will return an iterator with the matching triples. For example:
 
-```
+```python
 from hdtconnector.libhdtconnector import HDTConnector
 m_map = HDTConnector("my/path.hdt")
 
