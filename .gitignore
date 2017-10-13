@@ -4,6 +4,10 @@
 # m4 cache
 *.cache
 
+# hdt
+*.hdt.index
+*.hdt.index.v1-1
+
 # C++ Configure and Make
 Makefile
 Makefile.in
