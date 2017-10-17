@@ -43,10 +43,22 @@ HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring 
   // Check if ids were found in hdtfile.
   if ( ( tid.getSubject() == 0 && !suri1.empty() ) ||
        ( tid.getPredicate() == 0 && !suri2.empty() ) ||
-       ( tid.getObject() == 0 ) && !suri3.empty() )
+       ( tid.getObject() == 0 && !suri3.empty() ) )
   {
     return nullptr;
   }
 
   return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(tid) );
+}
+
+string
+HDTConnector::id_to_uri(unsigned int id, TripleComponentRole role)
+{
+  return hdt -> getDictionary() -> idToString(id, role);
+}
+
+unsigned int
+HDTConnector::uri_to_id(string uri, TripleComponentRole role)
+{
+  return hdt -> getDictionary() -> stringToId(uri, role);
 }
