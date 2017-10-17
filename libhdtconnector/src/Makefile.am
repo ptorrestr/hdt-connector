@@ -7,9 +7,11 @@ libhdtconnector_la_CPPFLAGS = \
 
 libhdtconnector_la_SOURCES = \
 	HDTTriple.cpp \
+	HDTTripleID.cpp \
 	HDTConnector.cpp \
 	ConvertProgress.cpp \
 	HDTIterator.cpp \
+	HDTIteratorTripleID.cpp \
 	hdtconnector_so.cpp
 
 libhdtconnector_la_LIBADD = 

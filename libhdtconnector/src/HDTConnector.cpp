@@ -31,3 +31,22 @@ HDTConnector::search(const wstring& w_uri1, const wstring& w_uri2, const wstring
 	return make_shared<HDTIterator>(iter);
 }
 
+shared_ptr<HDTIteratorTripleID>
+HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring &uri3)
+{
+  const string suri1( uri1.begin(), uri1.end() );
+  const string suri2( uri2.begin(), uri2.end() );
+  const string suri3( uri3.begin(), uri3.end() );
+  TripleString ts(suri1, suri2, suri3);
+  TripleID tid;
+  hdt -> getDictionary() -> tripleStringtoTripleID(ts, tid);
+  // Check if ids were found in hdtfile.
+  if ( ( tid.getSubject() == 0 && !suri1.empty() ) ||
+       ( tid.getPredicate() == 0 && !suri2.empty() ) ||
+       ( tid.getObject() == 0 ) && !suri3.empty() )
+  {
+    return nullptr;
+  }
+
+  return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(tid) );
+}

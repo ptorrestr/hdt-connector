@@ -2,7 +2,9 @@
 #include <memory>
 #include "HDTConnector.h"
 #include "HDTIterator.h"
+#include "HDTIteratorTripleID.h"
 #include "HDTTriple.h"
+#include "HDTTripleID.h"
 
 using namespace std;
 using namespace boost::python;
@@ -19,16 +21,24 @@ BOOST_PYTHON_MODULE(libhdtconnector)
     .def("get_predicate", &HDTTriple::get_predicate )
     .def("get_object", &HDTTriple::get_object )
   ;
-  //register_ptr_to_python< shared_ptr<HDTTriple> >();
+  class_<HDTTripleID, shared_ptr<HDTTripleID> >("HDTTripleID", no_init)
+    .def("get_subject", &HDTTripleID::get_subject )
+    .def("get_predicate", &HDTTripleID::get_predicate )
+    .def("get_object", &HDTTripleID::get_object )
+  ;
 
 	class_<HDTIterator, shared_ptr<HDTIterator> >("HDTIterator", no_init)
 		.def("has_next", &HDTIterator::has_next)
 		.def("next", &HDTIterator::next)
 	;
-	//register_ptr_to_python< shared_ptr<HDTIterator> >();
-	
+  class_<HDTIteratorTripleID, shared_ptr<HDTIteratorTripleID> >("HDTIteratorTripleID", no_init)
+    .def("has_next", &HDTIteratorTripleID::has_next)
+    .def("next", &HDTIteratorTripleID::next)
+	;
+
 	class_<HDTConnector, shared_ptr<HDTConnector> >("HDTConnector", no_init)
 		.def("__init__", make_constructor(&init_from_c_string))
 		.def("search", &HDTConnector::search)
+    .def("search_id", &HDTConnector::search_id)
 	;
 }
