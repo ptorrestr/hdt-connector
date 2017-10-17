@@ -14,6 +14,11 @@ static shared_ptr<HDTConnector> init_from_c_string(const string &val)
 	return make_shared<HDTConnector>(val);
 }
 
+// For functions with similar name, we need to wrap them in a pointer
+// and give that pointer to python
+shared_ptr<HDTIteratorTripleID> (HDTConnector::*search_id_1)(const wstring& uri1, const wstring& uri2, const wstring& uri3) = &HDTConnector::search_id;
+shared_ptr<HDTIteratorTripleID> (HDTConnector::*search_id_2)(unsigned int id1, unsigned int id2, unsigned int id3) = &HDTConnector::search_id;
+
 BOOST_PYTHON_MODULE(libhdtconnector)
 {
   enum_<TripleComponentRole>("triple_role")
@@ -45,7 +50,8 @@ BOOST_PYTHON_MODULE(libhdtconnector)
 	class_<HDTConnector, shared_ptr<HDTConnector> >("HDTConnector", no_init)
 		.def("__init__", make_constructor(&init_from_c_string))
 		.def("search", &HDTConnector::search)
-    .def("search_id", &HDTConnector::search_id)
+    .def("search_id", search_id_1) //Note that this is a pointer to a function
+    .def("search_id", search_id_2) //Note that this is a pointer to a function
     .def("id_to_uri", &HDTConnector::id_to_uri)
     .def("uri_to_id", &HDTConnector::uri_to_id)
 	  ;

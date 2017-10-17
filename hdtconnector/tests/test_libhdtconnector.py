@@ -17,6 +17,14 @@ class TestHDTConnector(unittest.TestCase):
     while iter.has_next():
       print( iter.next().get_subject() )
 
+  def test_should_iterate_hdt_file_by_using_ids_in_search(self):
+    m_map = HDTConnector(m_file)
+    iter = m_map.search_id("", "", "")
+    triple = iter.next()
+    iter = m_map.search_id(triple.get_subject(), triple.get_predicate(), triple.get_object())
+    while iter.has_next():
+      print( iter.next().get_subject() )
+
   def test_should_transform_id_into_url(self):
     m_map = HDTConnector(m_file)
     iter = m_map.search_id("", "", "")

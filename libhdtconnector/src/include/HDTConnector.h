@@ -21,6 +21,7 @@ public:
 	virtual ~HDTConnector();
 	shared_ptr<HDTIterator> search(const wstring& uri1, const wstring& uri2, const wstring& uri3);
   shared_ptr<HDTIteratorTripleID> search_id(const wstring& uri1, const wstring& uri2, const wstring& uri3);
+  shared_ptr<HDTIteratorTripleID> search_id(unsigned int id1, unsigned int id2, unsigned int id3);
   string id_to_uri(unsigned int id, TripleComponentRole role);
   unsigned int uri_to_id(string uri, TripleComponentRole role);
 };

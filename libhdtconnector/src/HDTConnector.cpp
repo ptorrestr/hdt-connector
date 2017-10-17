@@ -51,6 +51,13 @@ HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring 
   return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(tid) );
 }
 
+shared_ptr<HDTIteratorTripleID>
+HDTConnector::search_id(unsigned int id1, unsigned int id2, unsigned int id3)
+{
+  TripleID tid(id1, id2, id3);
+  return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(tid) );
+}
+
 string
 HDTConnector::id_to_uri(unsigned int id, TripleComponentRole role)
 {
