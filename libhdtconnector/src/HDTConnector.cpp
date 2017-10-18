@@ -34,9 +34,9 @@ HDTConnector::search(const wstring& w_uri1, const wstring& w_uri2, const wstring
 shared_ptr<HDTIteratorTripleID>
 HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring &uri3)
 {
-  const string suri1( uri1.begin(), uri1.end() );
-  const string suri2( uri2.begin(), uri2.end() );
-  const string suri3( uri3.begin(), uri3.end() );
+  const string suri1 = Utilities::unicode_to_utf8(uri1);
+  const string suri2 = Utilities::unicode_to_utf8(uri2);
+  const string suri3 = Utilities::unicode_to_utf8(uri3);
   TripleString ts(suri1, suri2, suri3);
   TripleID tid;
   hdt -> getDictionary() -> tripleStringtoTripleID(ts, tid);
@@ -58,14 +58,15 @@ HDTConnector::search_id(unsigned int id1, unsigned int id2, unsigned int id3)
   return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(tid) );
 }
 
-string
-HDTConnector::id_to_uri(unsigned int id, TripleComponentRole role)
+wstring
+HDTConnector::id_to_uri(unsigned int id, const TripleComponentRole& role)
 {
-  return hdt -> getDictionary() -> idToString(id, role);
+  return Utilities::utf8_to_unicode(hdt -> getDictionary() -> idToString(id, role));
 }
 
 unsigned int
-HDTConnector::uri_to_id(string uri, TripleComponentRole role)
+HDTConnector::uri_to_id(const wstring& uri, const TripleComponentRole& role)
 {
-  return hdt -> getDictionary() -> stringToId(uri, role);
+  return hdt -> getDictionary() -> stringToId(
+      Utilities::unicode_to_utf8(uri), role);
 }

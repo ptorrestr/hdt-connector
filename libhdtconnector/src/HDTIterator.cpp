@@ -1,4 +1,4 @@
-#include <HDTIterator.h>
+#include "HDTIterator.h"
 
 HDTIterator::HDTIterator(IteratorTripleString *iter) : iter(iter)
 {
@@ -13,17 +13,6 @@ HDTIterator::~HDTIterator()
 	}
 }
 
-bool
-HDTIterator::has_next()
-{
-	if ( !iter )
-	{
-		cout << "iter is null" << endl;
-		return false;
-	}
-	return iter -> hasNext();
-}
-
 shared_ptr<HDTTriple>
 HDTIterator::next()
 {
@@ -31,5 +20,7 @@ HDTIterator::next()
 	{
 		return make_shared<HDTTriple>( iter -> next());
 	}
+  PyErr_SetString(PyExc_StopIteration, "No more data");
+  throw_error_already_set();
 	return nullptr;
 }

@@ -13,16 +13,6 @@ HDTIteratorTripleID::~HDTIteratorTripleID()
   }
 }
 
-bool
-HDTIteratorTripleID::has_next() const
-{
-  if ( !iter )
-  {
-    return false;
-  }
-  return iter -> hasNext();
-}
-
 shared_ptr<HDTTripleID>
 HDTIteratorTripleID::next()
 {
@@ -30,5 +20,7 @@ HDTIteratorTripleID::next()
   {
     return make_shared<HDTTripleID>( iter -> next() );
   }
+  PyErr_SetString(PyExc_StopIteration, "No more data");
+  throw_error_already_set();
   return nullptr;
 }

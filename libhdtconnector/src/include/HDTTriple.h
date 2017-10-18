@@ -4,6 +4,7 @@
 #include <string>
 #include <boost/python.hpp>
 #include <HDTManager.hpp>
+#include "Utilities.h"
 
 using namespace std;
 using namespace hdt;
@@ -18,9 +19,9 @@ public:
   HDTTriple(TripleString *triple);
   virtual ~HDTTriple();
 
-  string get_subject() const;
-  string get_predicate() const;
-  string get_object() const;
+  wstring get_subject() const;
+  wstring get_predicate() const;
+  wstring get_object() const;
 };
 
 #endif

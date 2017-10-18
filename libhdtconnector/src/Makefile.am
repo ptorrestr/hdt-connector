@@ -12,6 +12,7 @@ libhdtconnector_la_SOURCES = \
 	ConvertProgress.cpp \
 	HDTIterator.cpp \
 	HDTIteratorTripleID.cpp \
+	Utilities.cpp \
 	hdtconnector_so.cpp
 
 libhdtconnector_la_LIBADD = 
