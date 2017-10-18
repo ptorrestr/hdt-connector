@@ -32,8 +32,17 @@ class TestHDTConnector(unittest.TestCase):
   def test_should_iterate_search_until_get_a_stop_exception(self):
     m_map = HDTConnector(m_file)
     with self.assertRaises(StopIteration):
-       iter = m_map.search("some/non/existing/resource", "", "")
-       iter.__next__()
+      next( m_map.search("some/non/existing/resource", "", ""))
+
+  def test_should_iterate_search_id_with_ids_until_get_a_stop_exception(self):
+    m_map = HDTConnector(m_file)
+    with self.assertRaises(StopIteration):
+      next( m_map.search_id(123123123, 0, 0) )
+
+  def test_should_iterate_search_id_with_uris_until_get_a_stop_exception(self):
+    m_map = HDTConnector(m_file)
+    with self.assertRaises(StopIteration):
+      next( m_map.search_id("some/non/existing/resource", "", ""))
 
   def test_should_transform_id_into_url(self):
     m_map = HDTConnector(m_file)

@@ -45,7 +45,8 @@ HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring 
        ( tid.getPredicate() == 0 && !suri2.empty() ) ||
        ( tid.getObject() == 0 && !suri3.empty() ) )
   {
-    return nullptr;
+    // If couldn't found the uris, return an empty iterator
+    return make_shared<HDTIteratorTripleID>( new IteratorTripleID() );
   }
 
   return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(tid) );
