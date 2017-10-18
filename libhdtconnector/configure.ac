@@ -4,10 +4,11 @@ AC_INIT([hdtconnector], [1.0], [pablo.torres.t@gmail.com])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build])
-AC_CONFIG_HEADERS([build/config.h])
+AC_CONFIG_HEADERS([src/config.h])
 m4_include([m4-additional/ax_python_embed.m4])
 m4_include([m4-additional/ax_python_devel.m4])
 m4_include([m4-additional/ax_boost_base.m4])
+m4_include([m4-additional/ax_boost_locale.m4])
 m4_include([m4-additional/ax_boost_python.m4])
 m4_include([m4-additional/ax_require_defined.m4])
 m4_include([m4-additional/ax_cxx_compile_stdcxx.m4])
@@ -31,15 +32,17 @@ PKG_CHECK_MODULES([HDT], [hdt],[
 AC_CHECK_HEADERS([HDT.hpp], [], 
   AC_MSG_ERROR([Could not find HDT.hpp]))
 
-# Find Python
-#AX_PYTHON_DEVEL([ >= '3.2'])
-
-# Find boost 
-#AX_BOOST_BASE([1.57], [], 
-#  AC_MSG_ERROR([Could not find Boost Library]))
-
 # Find boost-python
 AX_BOOST_PYTHON
+
+# Find a recent glib version. If not, then use boost locale
+PKG_CHECK_MODULES([GLIB],[glib-2.0 >= 2.20],
+  [AC_DEFINE([HAVE_GLIB_2_2X], [1], [Have GLIB 2X])]
+  [enable_boost_locale=no],
+  [AX_BOOST_LOCALE]
+  [enable_boost_locale=yes]
+  )
+AM_CONDITIONAL([WANTS_BOOST_LOCALE],[ test "x$enable_boost_locale != xno"])
 
 AC_CONFIG_FILES([
   Makefile

@@ -2,8 +2,9 @@
 lib_LTLIBRARIES = libhdtconnector.la
 libhdtconnector_la_CPPFLAGS = \
 	-I./include \
-        $(BOOST_CPPFLAGS) \
-        $(PYTHON_CPPFLAGS) 
+	$(HDT_CPPFLAGS) \
+  $(BOOST_CPPFLAGS) \
+  $(PYTHON_CPPFLAGS) 
 
 libhdtconnector_la_SOURCES = \
 	HDTTriple.cpp \
@@ -20,7 +21,10 @@ libhdtconnector_la_LIBADD =
 libhdtconnector_la_LIBTOOLFLAGS = 
 
 libhdtconnector_la_LDFLAGS = \
-	-lhdt \
-        $(BOOST_LDFLAGS) -l$(BOOST_PYTHON_LIB) \
-        $(PYTHON_LIBS) \
-	$(PYTHON_EXTRA_LDFLAGS) 
+	$(HDT_LIBS) \
+  $(BOOST_LDFLAGS) -l$(BOOST_PYTHON_LIB) \
+  $(PYTHON_LIBS) $(PYTHON_EXTRA_LDFLAGS)
+
+if WANTS_BOOST_LOCALE
+libhdtconnector_la_LDFLAGS += $(BOOST_LOCALE_LIB)
+endif
