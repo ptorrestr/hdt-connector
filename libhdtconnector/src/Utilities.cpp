@@ -11,7 +11,7 @@ wstring_convert<codecvt_utf8_utf16<wchar_t>> Utilities::converter;
 string
 Utilities::unicode_to_utf8(const wstring& unicode)
 {
-#ifdef HAV_CODECVT
+#ifdef HAVE_CODECVT
   return converter.to_bytes(unicode);
 #endif
 #ifdef HAVE_BOOST_LOCALE
