@@ -5,10 +5,11 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_GLIB_2_2X
+#ifdef HAVE_CODECVT
 #include <locale>
 #include <codecvt>
-#elif HAVE_BOOST_LOCALE
+#endif
+#ifdef HAVE_BOOST_LOCALE
 #include <boost/locale/encoding_utf.hpp>
 #endif
 #include <string>
@@ -21,7 +22,7 @@ using boost::locale::conv::utf_to_utf;
 class Utilities
 {
 private:
-#ifdef HAVE_GLIB_2_2X
+#ifdef HAVE_CODECVT
   static wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
 #endif
 

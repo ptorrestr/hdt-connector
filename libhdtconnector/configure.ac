@@ -36,8 +36,8 @@ AC_CHECK_HEADERS([HDT.hpp], [],
 AX_BOOST_PYTHON
 
 # Find a recent glib version. If not, then use boost locale
-PKG_CHECK_MODULES([GLIB],[glib-2.0 >= 2.20],
-  [AC_DEFINE([HAVE_GLIB_2_2X], [1], [Have GLIB 2X])]
+AC_CHECK_HEADER([codecvt],
+  [AC_DEFINE([HAVE_CODECVT], [1], [Have GLIB 2X])]
   [enable_boost_locale=no],
   [AX_BOOST_LOCALE]
   [enable_boost_locale=yes]
