@@ -31,3 +31,49 @@ HDTConnector::search(const wstring& w_uri1, const wstring& w_uri2, const wstring
 	return make_shared<HDTIterator>(iter);
 }
 
+shared_ptr<HDTIteratorTripleID>
+HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring &uri3)
+{
+  const string suri1 = Utilities::unicode_to_utf8(uri1);
+  const string suri2 = Utilities::unicode_to_utf8(uri2);
+  const string suri3 = Utilities::unicode_to_utf8(uri3);
+  TripleString ts(suri1, suri2, suri3);
+  TripleID tid;
+  hdt -> getDictionary() -> tripleStringtoTripleID(ts, tid);
+  // Check if ids were found in hdtfile.
+  if ( ( tid.getSubject() == 0 && !suri1.empty() ) ||
+       ( tid.getPredicate() == 0 && !suri2.empty() ) ||
+       ( tid.getObject() == 0 && !suri3.empty() ) )
+  {
+    // If couldn't found the uris, return an empty iterator
+    return make_shared<HDTIteratorTripleID>( new IteratorTripleID() );
+  }
+  return search_id(tid);
+}
+
+shared_ptr<HDTIteratorTripleID>
+HDTConnector::search_id(unsigned int id1, unsigned int id2, unsigned int id3)
+{
+  TripleID tid(id1, id2, id3);
+  return search_id(tid);
+}
+
+shared_ptr<HDTIteratorTripleID>
+HDTConnector::search_id(TripleID& triple)
+{
+  // search should receive a const tripleID&
+  return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(triple) );
+}
+
+wstring
+HDTConnector::id_to_uri(unsigned int id, const TripleComponentRole& role)
+{
+  return Utilities::utf8_to_unicode(hdt -> getDictionary() -> idToString(id, role));
+}
+
+unsigned int
+HDTConnector::uri_to_id(const wstring& uri, const TripleComponentRole& role)
+{
+  return hdt -> getDictionary() -> stringToId(
+      Utilities::unicode_to_utf8(uri), role);
+}

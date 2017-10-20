@@ -19,7 +19,6 @@ public:
 	HDTIterator(IteratorTripleString *iter);
 	virtual ~HDTIterator();
 
-	bool has_next();
 	shared_ptr<HDTTriple> next();
 };
 

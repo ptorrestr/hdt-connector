@@ -38,25 +38,29 @@ Usage
 For reading a HDT file you must use `HDTConnector` object from which you can do a search. Each search will return an iterator with the matching triples. For example:
 
 ```python
+from itertools import islice
 from hdtconnector.libhdtconnector import HDTConnector
 m_map = HDTConnector("my/path.hdt")
 
-# All the collection
+# Read the 10-first elements in the collection
 iter = m_map.search("", "", "")
-while iter.has_next():
-  print( iter.next().get_subject() )
+for triple in islice(iter, 10):
+  print( triple.get_subject() )
 
 # Specific subset
-resource = "some interesting resource"
+resource = "some/interesting/resource"
 iter = m_map.search(resource, "", "")
-while iter.has_next():
-  elem = iter.next()
-  print( elem.get_subject() )
-  print( elem.get_object() )
-  print( elem.get_predicate() )
+for triple in iter:
+  print( triple.get_subject() )
+  print( triple.get_object() )
+  print( triple.get_predicate() )
+
+# Search by Ids
+from hdtconnector.libhdtconnector import triple_role
+
+id = m_map.uri_to_id( resource, triple_role.subject)
+iter = m_map.search_id( id, 0, 0) # 0 means *
+for triple in iter:
+  print( triple.get_object() )
 
 ```
-
-
-
-
