@@ -1,21 +1,20 @@
 AC_PREREQ(2.65)
 LT_PREREQ([2.4.0])
 AC_INIT([hdtconnector], [1.0], [pablo.torres.t@gmail.com])
-
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_MACRO_DIR([m4-additional])
 AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_HEADERS([src/config.h])
-AM_INIT_AUTOMAKE([1.11 foreign])
+AM_INIT_AUTOMAKE([foreign])
+AM_SILENT_RULES([yes]) # Silent bulding
 
 AC_PROG_CXX # Define CXX compiler
-AC_LANG_CPLUSPLUS # Define CXX for test
+gl_EARLY
+AC_LANG([C++])
+AC_PROG_INSTALL
+AC_PROG_CPP
 AM_PROG_AR # Define AR (archiver)
-AM_SILENT_RULES([yes]) # Silent bulding
 LT_INIT([shared static]) # Must be called after CXX AR
-
-# Force CXX11
-AX_CXX_COMPILE_STDCXX([11],[],[mandatory])
+AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 
 # Find HDT 
 PKG_CHECK_MODULES([HDT], [hdt],[
