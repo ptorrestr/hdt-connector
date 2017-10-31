@@ -2,9 +2,10 @@
 lib_LTLIBRARIES = libhdtconnector.la
 libhdtconnector_la_CPPFLAGS = \
 	-I./include \
+	$(WARN_CFLAGS) \
 	$(HDT_CPPFLAGS) \
-  $(BOOST_CPPFLAGS) \
-  $(PYTHON_CPPFLAGS) 
+	$(BOOST_CPPFLAGS) \
+	$(PYTHON_CPPFLAGS) 
 
 libhdtconnector_la_SOURCES = \
 	HDTTriple.cpp \

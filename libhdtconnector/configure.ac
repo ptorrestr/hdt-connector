@@ -1,28 +1,20 @@
 AC_PREREQ(2.65)
 LT_PREREQ([2.4.0])
 AC_INIT([hdtconnector], [1.0], [pablo.torres.t@gmail.com])
-
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_HEADERS([src/config.h])
-m4_include([m4-additional/ax_python_embed.m4])
-m4_include([m4-additional/ax_python_devel.m4])
-m4_include([m4-additional/ax_boost_base.m4])
-m4_include([m4-additional/ax_boost_locale.m4])
-m4_include([m4-additional/ax_boost_python.m4])
-m4_include([m4-additional/ax_require_defined.m4])
-m4_include([m4-additional/ax_cxx_compile_stdcxx.m4])
-m4_include([m4-additional/ax_cxx_compile_stdcxx_11.m4])
-AM_INIT_AUTOMAKE([1.11 foreign])
+AM_INIT_AUTOMAKE([foreign])
+AM_SILENT_RULES([yes]) # Silent bulding
 
 AC_PROG_CXX # Define CXX compiler
-AC_LANG_CPLUSPLUS # Define CXX for test
+gl_EARLY
+AC_LANG([C++])
+AC_PROG_INSTALL
+AC_PROG_CPP
 AM_PROG_AR # Define AR (archiver)
-AM_SILENT_RULES([yes]) # Silent bulding
 LT_INIT([shared static]) # Must be called after CXX AR
-
-# Force CXX11
-AX_CXX_COMPILE_STDCXX([11],[],[mandatory])
+AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 
 # Find HDT 
 PKG_CHECK_MODULES([HDT], [hdt],[
@@ -43,6 +35,9 @@ AC_CHECK_HEADER([codecvt],
   [enable_boost_locale=yes]
   )
 AM_CONDITIONAL([WANTS_BOOST_LOCALE],[ test "x$enable_boost_locale != xno"])
+
+gl_INIT
+gl_WARN_ADD([-Wno-return-type],[WARN_CFLAGS])
 
 AC_CONFIG_FILES([
   Makefile
