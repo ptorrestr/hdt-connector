@@ -51,6 +51,7 @@ AC_CHECK_HEADER([numpy/arrayobject.h],
 
 gl_INIT
 gl_WARN_ADD([-Wno-return-type],[WARN_CFLAGS])
+gl_COMPILER_OPTION_IF([-fpermissive], [WARN_CFLAGS="-fpermissive $WARN_CFLAGS"])
 AC_CONFIG_FILES([
   Makefile
   src/Makefile
