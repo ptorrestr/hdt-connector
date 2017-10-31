@@ -44,6 +44,19 @@ AC_CHECK_HEADER([codecvt],
   )
 AM_CONDITIONAL([WANTS_BOOST_LOCALE],[ test "x$enable_boost_locale != xno"])
 
+# Find numpy headers
+numpy_import=$(python -c "import numpy; print(numpy.get_include())")
+AS_IF(test ! -z $numpy_import,
+	O_CPPFLAGS="$CPPFLAGS"
+	CPPFLAGS="-I$numpy_import $PYTHON_CPPFLAGS $CPPFLAGS"
+	)
+AC_CHECK_HEADER([numpy/arrayobject.h],
+	[AC_SUBST(NUMPY_CPPFLAGS, ["-I$numpy_import"])]
+	[AC_SUBST(NUMPY_LIBS, ["-lboost_numpy3"])]
+	[CPPFLAGS="$O_CPPFLAGS"],
+	[AC_MSG_ERROR([Could not find numpy headers])]
+	)
+
 AC_CONFIG_FILES([
   Makefile
   src/Makefile

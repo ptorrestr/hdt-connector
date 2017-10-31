@@ -1,4 +1,5 @@
 import unittest
+import numpy as np
 from itertools import islice
 from hdtconnector.libhdtconnector import HDTConnector
 from hdtconnector.libhdtconnector import triple_role
@@ -73,3 +74,11 @@ class TestHDTConnector(unittest.TestCase):
   def test_should_create_c_object_and_delete_when_not_used(self):
     m_map = HDTConnector(m_file)
     del m_map
+
+  def test_should_properly_parse_a_numpy_type(self):
+    m_map = HDTConnector(m_file)
+    t_list = list(islice(m_map.search_id("", "", ""), 10))
+    t_np_array = np.array([ x.get_subject() for x in t_list ], dtype = np.uint32)
+    for i in range(0, len(t_np_array)):
+      m_map.search_id(t_np_array[i], 0, 0)
+

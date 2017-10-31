@@ -12,11 +12,13 @@ source:
 requirements:
   build:
     - python
+    - numpy
     - setuptools
     - hdtcpp
     - boost
   run:
     - python
+    - numpy
     - hdtcpp
     - boost
 test:
