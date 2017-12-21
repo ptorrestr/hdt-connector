@@ -1,9 +1,15 @@
 #include "ConvertProgress.h"
 
+ConvertProgress::ConvertProgress(bool notify_) : notify(notify_)
+{
+}
+
 void
 ConvertProgress::notifyProgress(float level, float level2, const char *section)
 {
-	cout << section << ": " << level << " %";
-	cout << "\r " << section << ": " << level << " % \r";
-	cout.flush();
+	if ( notify ) 
+	{
+		cout << "\r " << section << ": " << level << " % \r";
+		cout.flush();
+	}
 }

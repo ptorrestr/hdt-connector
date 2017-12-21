@@ -3,10 +3,26 @@ import numpy as np
 from itertools import islice
 from hdtconnector.libhdtconnector import HDTConnector
 from hdtconnector.libhdtconnector import triple_role
+import subprocess
+import os
 
 m_file = "etc/test.hdt"
 
 class TestHDTConnector(unittest.TestCase):
+  def test_should_not_write_to_stdout_when_opening_file(self):
+    path = os.path.dirname(os.path.realpath(__file__))
+    arg = ["python", path + "/open_hdtconnector_no_notification.py"]
+    p = subprocess.run(arg, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    self.assertEqual(len(p.stdout), 0)
+    self.assertEqual(len(p.stderr), 0)
+
+  def test_should_write_to_stdout_when_opening_file(self):
+    path = os.path.dirname(os.path.realpath(__file__))
+    arg = ["python", path + "/open_hdtconnector_notification.py"]
+    p = subprocess.run(arg, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    self.assertGreater(len(p.stdout), 0)
+    self.assertEqual(len(p.stderr), 0)
+
   def test_should_iterate_hdt_file_getting_uris(self):
     m_map = HDTConnector(m_file)
     t_list = list(islice(m_map.search("", "", ""), 10))

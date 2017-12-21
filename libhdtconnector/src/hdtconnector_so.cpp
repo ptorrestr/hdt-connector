@@ -18,7 +18,13 @@ namespace np = boost::python::numpy;
 
 static shared_ptr<HDTConnector> init_from_c_string(const string &val)
 {
-	return make_shared<HDTConnector>(val);
+	// By default, the notification messages are not displayed
+	return make_shared<HDTConnector>(val, false);
+}
+
+static shared_ptr<HDTConnector> init_from_c_string_notify(const string &val, bool notify)
+{
+	return make_shared<HDTConnector>(val, notify);
 }
 
 // For functions with similar name, we need to wrap them in a pointer
@@ -77,6 +83,7 @@ BOOST_PYTHON_MODULE(libhdtconnector)
 
 	class_<HDTConnector, shared_ptr<HDTConnector> >("HDTConnector", no_init)
 		.def("__init__", make_constructor(&init_from_c_string))
+		.def("__init__", make_constructor(&init_from_c_string_notify))
 		.def("search", &HDTConnector::search)
 		.def("search_id", search_id_1) //Note that this is a pointer to a function
   	.def("search_id", search_id_2) //Note that this is a pointer to a function

@@ -1,14 +1,14 @@
 #include "HDTConnector.h"
 
-HDTConnector::HDTConnector(const string &hdt_file) : hdt(NULL)
+HDTConnector::HDTConnector(const string &hdt_file, bool notify) : hdt(NULL)
 {
 	try {
-		ConvertProgress prog;
+		ConvertProgress prog(notify);
 		hdt = HDTManager::mapIndexedHDT(hdt_file.c_str(), &prog);
 	}
 	catch (...)
 	{
-		cerr << "Error createing the HDT!" << endl;
+		cerr << "Error when opening HDT file" << endl;
 	}
 }
 

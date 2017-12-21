@@ -18,7 +18,7 @@ private:
 	HDT *hdt;
 
 public:
-	HDTConnector(const string &hdt_file);
+	HDTConnector(const string &hdt_file, bool notify);
 	virtual ~HDTConnector();
 	shared_ptr<HDTIterator> search(const wstring& uri1, const wstring& uri2, const wstring& uri3);
   shared_ptr<HDTIteratorTripleID> search_id(const wstring& uri1, const wstring& uri2, const wstring& uri3);
