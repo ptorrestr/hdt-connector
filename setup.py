@@ -75,14 +75,8 @@ class build_hdtconnector(build):
       call(cmd_symlink, cwd=build_path + "/lib")
       print('*'*80)
 
-    def cat():
-      print('*'*80)
-      call(["cat","config.log"], cwd=HDTCONNECTOR_PATH)
-      print('*'*80)
-
     self.execute(autogen, [], 'generating autotools')
     self.execute(configure, [], 'configuring hdtconnector')
-    self.execute(cat, [], 'resulting config.log')
     self.execute(compile, [], 'compiling htdconnector')
     if platform.system() == "Darwin":
       self.execute(symlink, [], 'adding symlink for htdconnector')

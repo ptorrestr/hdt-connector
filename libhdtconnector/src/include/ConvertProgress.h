@@ -9,7 +9,9 @@ using namespace std;
 
 class ConvertProgress : public ProgressListener {
 private:
+	bool notify;
 public:
+	ConvertProgress(bool);
 	void notifyProgress(float level, float level2, const char *section);
 };
 
