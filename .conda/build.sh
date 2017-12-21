@@ -17,7 +17,7 @@ if [ "$(uname)" == "Darwin" ]; then
     CXX=${CXX:-llvm-g++} \
     CC=${CC:-llvm-gcc} \
     BOOST_ROOT=${PREFIX} \
-    $PYTHON setup.py install
+    $PYTHON setup.py install || ( cat libhdtconnector/config.log && exit -1 )
   unlink ${PREFIX}/lib64
 fi
 
@@ -27,6 +27,6 @@ if [ "$(uname)" == "Linux" ]; then
     CXX=${CXX:-g++} \
     CC=${CC:-gcc} \
     BOOST_ROOT=${PREFIX} \
-    $PYTHON setup.py install
+    $PYTHON setup.py install || ( cat libhdtconnector/config.log && exit -1 )
   unlink ${PREFIX}/lib64
 fi

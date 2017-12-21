@@ -3,7 +3,7 @@
 set -x -e
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-  rvm get stable # We need this since there is a bug in osx. See https://github.com/travis-ci/travis-ci/issues/6307
+  #rvm get stable # We need this since there is a bug in osx. See https://github.com/travis-ci/travis-ci/issues/6307
   os="MacOSX"
 else
   os="Linux"
@@ -15,13 +15,12 @@ bash miniconda.sh -b -p $HOME/miniconda
 export PATH="$HOME/miniconda/bin:$PATH"
 hash -r
 conda config --set always_yes yes --set changeps1 no
-conda update -q conda
-conda info -a
+conda update conda $CONDA_FLAGS
 
 conda config --add channels conda-forge
 conda config --add channels ptorrestr
 conda config --get channels
-conda install conda-build anaconda-client
-conda update -n root conda-build
+conda install conda-build anaconda-client $CONDA_FLAGS
+conda update -n root conda-build $CONDA_FLAGS
 
-conda build .conda/ --no-test --no-anaconda-upload
+conda build .conda/ --no-test --no-anaconda-upload -q
