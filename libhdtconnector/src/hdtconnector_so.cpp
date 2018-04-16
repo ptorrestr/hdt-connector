@@ -59,7 +59,7 @@ BOOST_PYTHON_MODULE(libhdtconnector)
 		.value("subject", SUBJECT)
 		.value("predicate", PREDICATE)
 		.value("object", OBJECT)
-		; 
+		;
 
 	class_<HDTTriple, shared_ptr<HDTTriple> >("HDTTriple", no_init)
 		.def("get_subject", &HDTTriple::get_subject )
@@ -86,8 +86,10 @@ BOOST_PYTHON_MODULE(libhdtconnector)
 		.def("__init__", make_constructor(&init_from_c_string_notify))
 		.def("search", &HDTConnector::search)
 		.def("search_id", search_id_1) //Note that this is a pointer to a function
-  	.def("search_id", search_id_2) //Note that this is a pointer to a function
+		.def("search_id", search_id_2) //Note that this is a pointer to a function
 		.def("id_to_uri", &HDTConnector::id_to_uri)
 		.def("uri_to_id", &HDTConnector::uri_to_id)
+		.def("is_shared", &HDTConnector::is_shared)
+		.def("is_literal", &HDTConnector::is_literal)
 		;
 }
