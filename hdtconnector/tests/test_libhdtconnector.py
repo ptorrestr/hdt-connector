@@ -7,6 +7,7 @@ import subprocess
 import os
 
 m_file = "etc/test.hdt"
+m_file_literals = "etc/literals.hdt"
 
 class TestHDTConnector(unittest.TestCase):
   def test_should_not_write_to_stdout_when_opening_file(self):
@@ -98,3 +99,20 @@ class TestHDTConnector(unittest.TestCase):
     for i in range(0, len(t_np_array)):
       m_map.search_id(t_np_array[i], 0, 0)
 
+  def test_should_find_shared_objects(self):
+    m_map = HDTConnector(m_file)
+    t_list = list(islice(m_map.search_id("", "", ""), 10))
+    t_np_array = np.array([ (x.get_subject(),x.get_object()) for x in t_list ], dtype = "uint32,uint32")
+    for id_sub, id_obj in t_np_array:
+        # This dataset does not have shared elements
+        print(id_sub, id_obj)
+        self.assertFalse(m_map.is_shared(id_sub))
+        self.assertFalse(m_map.is_shared(id_obj))
+
+  def test_should_find_literal_objects(self):
+    m_map = HDTConnector(m_file_literals)
+    t_list = list(islice(m_map.search_id("", "", ""), 10))
+    t_np_array = np.array([ (x.get_subject(), x.get_object()) for x in t_list ], dtype = "uint32,uint32")
+    for id_sub, id_obj in t_np_array:
+        # This dataset every object is a literal
+        self.assertTrue(m_map.is_literal(id_obj))
