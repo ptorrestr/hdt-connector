@@ -26,6 +26,8 @@ public:
   shared_ptr<HDTIteratorTripleID> search_id(TripleID& triple);
   wstring id_to_uri(unsigned int id, const TripleComponentRole& role);
   unsigned int uri_to_id(const wstring& uri, const TripleComponentRole& role);
+	bool is_shared(unsigned int object_id);
+	bool is_literal(unsigned int object_id);
 };
 
 #endif

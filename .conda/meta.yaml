@@ -14,12 +14,12 @@ requirements:
     - python
     - numpy
     - setuptools
-    - hdtcpp
+    - hdtcpp >=1.3
     - boost
   run:
     - python
     - numpy
-    - hdtcpp
+    - hdtcpp >=1.3
     - boost
 test:
   source_files:
