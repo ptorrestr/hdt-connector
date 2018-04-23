@@ -14,7 +14,7 @@ using namespace hdt;
 
 class HDTConnector
 {
-private: 
+private:
 	HDT *hdt;
 
 public:
@@ -28,6 +28,7 @@ public:
   unsigned int uri_to_id(const wstring& uri, const TripleComponentRole& role);
 	bool is_shared(unsigned int object_id);
 	bool is_literal(unsigned int object_id);
+	string get_header_property(const string& subject, const string& predicate);
 };
 
 #endif
