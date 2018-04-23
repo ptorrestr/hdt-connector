@@ -24,7 +24,7 @@ libhdtconnector_la_LIBTOOLFLAGS =
 
 libhdtconnector_la_LDFLAGS = \
 	$(HDT_LIBS) \
-  $(BOOST_LDFLAGS) $(BOOST_PYTHON_LIB) \
+  $(BOOST_LDFLAGS) -l$(BOOST_PYTHON_LIB) \
   $(PYTHON_LIBS) $(PYTHON_EXTRA_LDFLAGS) \
 	$(NUMPY_LIBS)
 
