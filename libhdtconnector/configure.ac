@@ -36,6 +36,13 @@ AC_CHECK_HEADER([codecvt],
   )
 AM_CONDITIONAL([WANTS_BOOST_LOCALE],[ test "x$enable_boost_locale != xno"])
 
+# Find python version
+AC_MSG_CHECKING([for specific python version])
+python_version=$(python -c "import sys; print(\"%i%i\" %(sys.version_info.major,sys.version_info.minor))")
+AS_IF(test ! -z $python_version,
+	AC_MSG_RESULT([$python_version]),
+	AC_MSG_ERROR([Couldn't find python version])
+	)
 # Find numpy headers
 numpy_import=$(python -c "import numpy; print(numpy.get_include())")
 AS_IF(test ! -z $numpy_import,
@@ -44,7 +51,7 @@ AS_IF(test ! -z $numpy_import,
 	)
 AC_CHECK_HEADER([numpy/arrayobject.h],
 	[AC_SUBST(NUMPY_CPPFLAGS, ["-I$numpy_import"])]
-	[AC_SUBST(NUMPY_LIBS, ["-lboost_numpy3"])]
+	[AC_SUBST(NUMPY_LIBS, ["-lboost_numpy$python_version"])]
 	[CPPFLAGS="$O_CPPFLAGS"],
 	[AC_MSG_ERROR([Could not find numpy headers])]
 	)

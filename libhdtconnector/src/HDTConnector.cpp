@@ -87,10 +87,38 @@ HDTConnector::is_shared(unsigned int object_id)
 bool
 HDTConnector::is_literal(unsigned int object_id)
 {
-	if ( is_shared(object_id) ) 
+	if ( get_header_property("_:dictionary", "<http://purl.org/dc/terms/format>")
+			== "<http://purl.org/HDT/hdt#dictionaryLiteral>")
+	{
+		if ( is_shared(object_id) )
+			return false;
+		unsigned int local_object_id = hdt -> getDictionary() ->getMapping() == MAPPING2 ?
+			object_id - hdt ->getDictionary() ->getNshared():
+			object_id - hdt ->getDictionary() ->getNshared() - hdt ->getDictionary()	->getNsubjects() + 2;
+		return local_object_id <= hdt ->getDictionary() -> getNobjectsLiterals() ?  true : false ;
+	}
+	else
+	{
+		wstring uri = id_to_uri(object_id, TripleComponentRole::OBJECT);
+		if ( uri.front() == '\'' || uri.front() == '"')
+			return true;
 		return false;
-	unsigned int local_object_id = hdt -> getDictionary() ->getMapping() == MAPPING2 ?
-		object_id - hdt ->getDictionary() ->getNshared():
-		object_id - hdt ->getDictionary() ->getNshared() - hdt ->getDictionary()	->getNsubjects() + 2;
-	return local_object_id <= hdt ->getDictionary() -> getNobjectsLiterals() ?  true : false ;
+	}
+}
+
+string
+HDTConnector::get_header_property(const string& subject, const string& predicate)
+{
+	string element("");
+	IteratorTripleString *it = hdt ->getHeader() ->search(subject.c_str(), predicate.c_str(), "");
+	if ( it ->hasNext() )
+	{
+		element = it ->next() ->getObject();
+	}
+	delete it;
+	if ( element.size() <= 0 )
+	{
+		throw runtime_error("Property not found");
+	}
+	return element;
 }

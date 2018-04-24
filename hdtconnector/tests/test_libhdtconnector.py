@@ -116,3 +116,11 @@ class TestHDTConnector(unittest.TestCase):
     for id_sub, id_obj in t_np_array:
         # This dataset every object is a literal
         self.assertTrue(m_map.is_literal(id_obj))
+
+  def test_should_find_literal_objects_in_a_four_sec_dictionary(self):
+    m_map = HDTConnector(m_file)
+    t_list = list(islice(m_map.search_id("", "", ""), 10))
+    t_np_array = np.array([ (x.get_subject(), x.get_object()) for x in t_list ], dtype = "uint32,uint32")
+    for id_sub, id_obj in t_np_array:
+      # In this dataset every object is not a literal
+      self.assertFalse(m_map.is_literal(id_obj))
