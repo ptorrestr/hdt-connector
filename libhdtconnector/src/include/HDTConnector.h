@@ -16,6 +16,7 @@ class HDTConnector
 {
 private:
 	HDT *hdt;
+	bool is_dictionary_literal = false;
 
 public:
 	HDTConnector(const string &hdt_file, bool notify);

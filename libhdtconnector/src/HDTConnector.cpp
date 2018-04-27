@@ -5,6 +5,9 @@ HDTConnector::HDTConnector(const string &hdt_file, bool notify) : hdt(NULL)
 	try {
 		ConvertProgress prog(notify);
 		hdt = HDTManager::mapIndexedHDT(hdt_file.c_str(), &prog);
+		if (get_header_property("_:dictionary", "<http://purl.org/dc/terms/format>")
+      == "<http://purl.org/HDT/hdt#dictionaryLiteral>")
+			is_dictionary_literal = true;
 	}
 	catch (...)
 	{
@@ -87,8 +90,7 @@ HDTConnector::is_shared(unsigned int object_id)
 bool
 HDTConnector::is_literal(unsigned int object_id)
 {
-	if ( get_header_property("_:dictionary", "<http://purl.org/dc/terms/format>")
-			== "<http://purl.org/HDT/hdt#dictionaryLiteral>")
+	if ( is_dictionary_literal )
 	{
 		if ( is_shared(object_id) )
 			return false;
