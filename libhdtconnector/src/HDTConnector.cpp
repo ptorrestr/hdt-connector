@@ -35,7 +35,7 @@ HDTConnector::search(const wstring& w_uri1, const wstring& w_uri2, const wstring
 }
 
 shared_ptr<HDTIteratorTripleID>
-HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring &uri3)
+HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring &uri3, bool ext)
 {
 	const string suri1 = Utilities::unicode_to_utf8(uri1);
 	const string suri2 = Utilities::unicode_to_utf8(uri2);
@@ -51,18 +51,18 @@ HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring 
 		// If couldn't found the uris, return an empty iterator
 		return make_shared<HDTIteratorTripleID>( new IteratorTripleID() );
 	}
-	return search_id(tid);
+	return search_id(tid, ext);
 }
 
 shared_ptr<HDTIteratorTripleID>
-HDTConnector::search_id(unsigned int id1, unsigned int id2, unsigned int id3)
+HDTConnector::search_id(unsigned int id1, unsigned int id2, unsigned int id3, bool ext)
 {
 	TripleID tid(id1, id2, id3);
-	return search_id(tid);
+	return search_id(tid, ext);
 }
 
 shared_ptr<HDTIteratorTripleID>
-HDTConnector::search_id(TripleID& triple)
+HDTConnector::search_id(TripleID& triple, bool ext)
 {
 	// search should receive a const tripleID&
 	return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(triple) );

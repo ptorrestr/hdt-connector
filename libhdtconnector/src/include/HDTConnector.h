@@ -22,9 +22,9 @@ public:
 	HDTConnector(const string &hdt_file, bool notify);
 	virtual ~HDTConnector();
 	shared_ptr<HDTIterator> search(const wstring& uri1, const wstring& uri2, const wstring& uri3);
-  shared_ptr<HDTIteratorTripleID> search_id(const wstring& uri1, const wstring& uri2, const wstring& uri3);
-  shared_ptr<HDTIteratorTripleID> search_id(unsigned int id1, unsigned int id2, unsigned int id3);
-  shared_ptr<HDTIteratorTripleID> search_id(TripleID& triple);
+  shared_ptr<HDTIteratorTripleID> search_id(const wstring& uri1, const wstring& uri2, const wstring& uri3, bool ext=false);
+  shared_ptr<HDTIteratorTripleID> search_id(unsigned int id1, unsigned int id2, unsigned int id3, bool ext=false);
+  shared_ptr<HDTIteratorTripleID> search_id(TripleID& triple, bool ext);
   wstring id_to_uri(unsigned int id, const TripleComponentRole& role);
   unsigned int uri_to_id(const wstring& uri, const TripleComponentRole& role);
 	bool is_shared(unsigned int object_id);

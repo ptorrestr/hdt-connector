@@ -124,3 +124,16 @@ class TestHDTConnector(unittest.TestCase):
     for id_sub, id_obj in t_np_array:
       # In this dataset every object is not a literal
       self.assertFalse(m_map.is_literal(id_obj))
+
+
+  def test_should_iterate_search_id_non_extended(self):
+    m_map = HDTConnector(m_file)
+    t_list = list(islice(m_map.search_id(0, 0, 0, ext = False), 10))
+    for triple in t_list:
+      self.assertEqual(len(triple), 3)
+
+  def test_should_iterate_search_id_extended(self):
+    m_map = HDTConnector(m_file)
+    t_list = list(islice(m_map.search_id(0, 0, 0, ext = True), 10))
+    for triple in t_list:
+      self.assertEqual(len(triple), 3)

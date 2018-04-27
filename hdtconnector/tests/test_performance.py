@@ -6,17 +6,18 @@ import pytest
 
 m_file = "etc/test.hdt"
 
-def iterator_triple_id(m_map, type_):
+def iterator_triple_id(m_map, type_, ext):
     triples = np.array(
         [( subject, object_)
-            for subject, _ , object_ in m_map.search_id(0, 0, 0)]
+            for subject, _ , object_ in m_map.search_id(0, 0, 0, ext)]
         , dtype = type_)
     return 1
 
 @pytest.mark.parametrize("type_", ["u4,u4","u8,u8"])
-def test_iterator_triple_id(benchmark, type_):
+@pytest.mark.parametrize("ext", [True, False])
+def test_iterator_triple_id(benchmark, type_, ext):
     m_map = HDTConnector(m_file)
-    result = benchmark(iterator_triple_id, m_map, type_)
+    result = benchmark(iterator_triple_id, m_map, type_, ext)
 
 def iterator_triple_id_is_literal(m_map, type_):
     is_literal = m_map.is_literal
