@@ -27,6 +27,7 @@ test:
     - hdtconnector/tests
   requires:
     - pytest
+    - pytest-benchmark
   commands:
     - pytest
 about:
