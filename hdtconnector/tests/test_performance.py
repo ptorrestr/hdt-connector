@@ -8,9 +8,8 @@ m_file = "etc/test.hdt"
 
 def iterator_triple_id(m_map, type_):
     triples = np.array(
-        [( triple.get_subject(),
-            triple.get_object())
-            for triple in m_map.search_id(0, 0, 0)]
+        [( subject, object_)
+            for subject, _ , object_ in m_map.search_id(0, 0, 0)]
         , dtype = type_)
     return 1
 

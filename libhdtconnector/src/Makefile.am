@@ -10,7 +10,6 @@ libhdtconnector_la_CPPFLAGS = \
 
 libhdtconnector_la_SOURCES = \
 	HDTTriple.cpp \
-	HDTTripleID.cpp \
 	HDTConnector.cpp \
 	ConvertProgress.cpp \
 	HDTIterator.cpp \

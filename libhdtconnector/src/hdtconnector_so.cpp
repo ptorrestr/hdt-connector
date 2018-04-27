@@ -5,7 +5,6 @@
 #include "HDTIterator.h"
 #include "HDTIteratorTripleID.h"
 #include "HDTTriple.h"
-#include "HDTTripleID.h"
 #include "NumpyScalarConverter.h"
 
 // http://docs.scipy.org/doc/numpy/reference/c-api.array.html#importing-the-api
@@ -65,11 +64,6 @@ BOOST_PYTHON_MODULE(libhdtconnector)
 		.def("get_subject", &HDTTriple::get_subject )
 		.def("get_predicate", &HDTTriple::get_predicate )
 		.def("get_object", &HDTTriple::get_object )
-		;
-	class_<HDTTripleID, shared_ptr<HDTTripleID> >("HDTTripleID", no_init)
-		.def("get_subject", &HDTTripleID::get_subject )
-		.def("get_predicate", &HDTTripleID::get_predicate )
-		.def("get_object", &HDTTripleID::get_object )
 		;
 
 	class_<HDTIterator, shared_ptr<HDTIterator> >("HDTIterator", no_init)

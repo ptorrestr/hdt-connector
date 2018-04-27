@@ -60,7 +60,7 @@ from hdtconnector.libhdtconnector import triple_role
 
 id = m_map.uri_to_id( resource, triple_role.subject)
 iter = m_map.search_id( id, 0, 0) # 0 means *
-for triple in iter:
-  print( triple.get_object() )
+for s,o,p in iter:
+  print( "ids s=%i,o=%i,p=%i" %(s, o, p) )
 
 ```
