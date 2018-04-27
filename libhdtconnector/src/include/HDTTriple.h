@@ -13,7 +13,9 @@ using namespace boost::python;
 class HDTTriple
 {
 private:
-  TripleString *triple = NULL;
+	wstring subject;
+	wstring predicate;
+	wstring object;
 
 public:
   HDTTriple(TripleString *triple);

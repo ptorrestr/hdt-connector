@@ -7,34 +7,29 @@ HDTTriple::HDTTriple(TripleString *triple)
   // is changed. To avoid inconsistency with pre-fetching, we
   // copy the value into a local variable that is deleted only
   // when the this object is not used anymore.
-  this -> triple = new TripleString( triple -> getSubject(), 
-                             triple -> getPredicate(),
-                             triple -> getObject() );
+	this ->subject = Utilities::utf8_to_unicode( triple -> getSubject() );
+	this ->predicate = Utilities::utf8_to_unicode( triple -> getPredicate() );
+	this ->object = Utilities::utf8_to_unicode( triple -> getObject() );
 }
 
 HDTTriple::~HDTTriple()
 {
-  if ( triple )
-  {
-    delete triple;
-    triple = NULL;
-  }
 }
 
 wstring
 HDTTriple::get_subject() const
 {
-  return Utilities::utf8_to_unicode( triple -> getSubject() );
+	return subject;
 }
 
 wstring
 HDTTriple::get_object() const
 {
-  return Utilities::utf8_to_unicode( triple -> getObject() );
+	return object;
 }
 
 wstring
 HDTTriple::get_predicate() const
 {
-  return Utilities::utf8_to_unicode( triple -> getPredicate() );
+	return predicate;
 }

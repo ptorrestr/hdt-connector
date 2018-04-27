@@ -7,34 +7,29 @@ HDTTripleID::HDTTripleID(TripleID *triple)
   // is changed. To avoid inconsistency with pre-fetching, we
   // copy the value into a local variable that is deleted only
   // when the this object is not used anymore.
-  this -> triple = new TripleID(triple -> getSubject(),
-                        triple -> getPredicate(),
-                        triple -> getObject());
+	this ->subject = triple ->getSubject();
+	this ->predicate = triple ->getPredicate();
+	this ->object = triple ->getObject(); 
 }
 
 HDTTripleID::~HDTTripleID()
 {
-  if ( triple )
-  {
-    delete triple;
-    triple = NULL;
-  }
 }
 
 unsigned int
 HDTTripleID::get_subject() const
 {
-  return triple -> getSubject();
+  return subject;
 }
 
 unsigned int
 HDTTripleID::get_predicate() const
 {
-  return triple -> getPredicate();
+  return predicate;
 }
 
 unsigned int
 HDTTripleID::get_object() const
 {
-  return triple -> getObject();
+  return object;
 }

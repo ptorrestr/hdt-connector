@@ -10,7 +10,9 @@ using namespace hdt;
 class HDTTripleID
 {
 private:
-  TripleID *triple = NULL;
+	unsigned int subject;
+	unsigned int predicate;
+	unsigned int object;
 
 public:
   HDTTripleID(TripleID *triple);
