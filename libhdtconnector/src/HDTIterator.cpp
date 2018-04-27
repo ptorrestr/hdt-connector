@@ -13,14 +13,17 @@ HDTIterator::~HDTIterator()
 	}
 }
 
-shared_ptr<HDTTriple>
+boost::python::tuple
 HDTIterator::next()
 {
 	if ( iter->hasNext() ) //Iterator has next element
 	{
-		return make_shared<HDTTriple>( iter -> next());
+		TripleString *next = iter ->next();
+		return boost::python::make_tuple(next ->getSubject(),
+				next ->getPredicate(),
+				next ->getObject());
 	}
   PyErr_SetString(PyExc_StopIteration, "No more data");
   throw_error_already_set();
-	return nullptr;
+	return boost::python::make_tuple();
 }

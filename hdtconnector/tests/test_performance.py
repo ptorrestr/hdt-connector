@@ -20,9 +20,8 @@ def test_iterator_triple_id_peformance(benchmark, type_):
 
 def iterator_triple_string(m_map):
     triples = np.array(
-        [( triple.get_subject(),
-            triple.get_object())
-            for triple in m_map.search("", "", "")]
+        [( subject, object_)
+            for subject, _, object_ in m_map.search("", "", "")]
         )
     return 1
 

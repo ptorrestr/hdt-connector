@@ -9,7 +9,6 @@ libhdtconnector_la_CPPFLAGS = \
 	$(NUMPY_CPPFLAGS)
 
 libhdtconnector_la_SOURCES = \
-	HDTTriple.cpp \
 	HDTConnector.cpp \
 	ConvertProgress.cpp \
 	HDTIterator.cpp \

@@ -32,9 +32,9 @@ class TestHDTConnector(unittest.TestCase):
   def test_should_obtain_str_from_a_uri_iterator(self):
     m_map = HDTConnector(m_file)
     triple = next(m_map.search("", "", ""))
-    self.assertIsInstance(triple.get_subject(), str)
-    self.assertIsInstance(triple.get_predicate(), str)
-    self.assertIsInstance(triple.get_object(), str)
+    self.assertIsInstance(triple[0], str)
+    self.assertIsInstance(triple[1], str)
+    self.assertIsInstance(triple[2], str)
 
   def test_should_iterate_hdt_file_getting_ids(self):
     m_map = HDTConnector(m_file)
@@ -78,15 +78,15 @@ class TestHDTConnector(unittest.TestCase):
   def test_should_transform_uri_into_id(self):
     m_map = HDTConnector(m_file)
     triple = next(m_map.search("", "", ""))
-    s_id = m_map.uri_to_id( triple.get_subject(), triple_role.subject)
-    p_id = m_map.uri_to_id( triple.get_predicate(), triple_role.predicate)
-    o_id = m_map.uri_to_id( triple.get_object(), triple_role.object)
+    s_id = m_map.uri_to_id( triple[0], triple_role.subject)
+    p_id = m_map.uri_to_id( triple[1], triple_role.predicate)
+    o_id = m_map.uri_to_id( triple[2], triple_role.object)
     s_uri = m_map.id_to_uri( s_id, triple_role.subject)
     p_uri = m_map.id_to_uri( p_id, triple_role.predicate)
     o_uri = m_map.id_to_uri( o_id, triple_role.object)
-    self.assertEqual(triple.get_subject(), s_uri)
-    self.assertEqual(triple.get_predicate(), p_uri)
-    self.assertEqual(triple.get_object(), o_uri)
+    self.assertEqual(triple[0], s_uri)
+    self.assertEqual(triple[1], p_uri)
+    self.assertEqual(triple[2], o_uri)
 
   def test_should_create_c_object_and_delete_when_not_used(self):
     m_map = HDTConnector(m_file)
