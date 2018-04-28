@@ -61,4 +61,9 @@ iter = m_map.search_id( id, 0, 0) # 0 means *
 for s,p,o in iter:
   print( "ids s=%i,p=%i,o=%i" %(s,p,o) )
 
+# Search by Ids + extended options
+iter = m_map.search_id( id, 0, 0, ext = True)
+for s,p,o,iss, iso, ilo in iter:
+	print( "Is shared subject (%s), is shared object(%s), is literal object(%s)" %(iss, iso, ilo))
+
 ```
