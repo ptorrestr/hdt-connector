@@ -4,7 +4,6 @@
 #include <HDTManager.hpp>
 #include <boost/python.hpp>
 #include <memory>
-#include "HDTTriple.h"
 
 using namespace std;
 using namespace hdt;
@@ -19,7 +18,7 @@ public:
 	HDTIterator(IteratorTripleString *iter);
 	virtual ~HDTIterator();
 
-	shared_ptr<HDTTriple> next();
+	boost::python::tuple next();
 };
 
 #endif 

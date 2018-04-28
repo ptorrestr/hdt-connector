@@ -1,3 +1,6 @@
+# pytest-performance
+.pytest_cache
+
 # swap files
 *.swp
 

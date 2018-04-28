@@ -50,17 +50,20 @@ for triple in islice(iter, 10):
 # Specific subset
 resource = "some/interesting/resource"
 iter = m_map.search(resource, "", "")
-for triple in iter:
-  print( triple.get_subject() )
-  print( triple.get_object() )
-  print( triple.get_predicate() )
+for s,p,o in iter:
+  print( "urls s=%s,p=%s,o=%s", %(s,p,o) )
 
 # Search by Ids
 from hdtconnector.libhdtconnector import triple_role
 
 id = m_map.uri_to_id( resource, triple_role.subject)
 iter = m_map.search_id( id, 0, 0) # 0 means *
-for triple in iter:
-  print( triple.get_object() )
+for s,p,o in iter:
+  print( "ids s=%i,p=%i,o=%i" %(s,p,o) )
+
+# Search by Ids + extended options
+iter = m_map.search_id( id, 0, 0, ext = True)
+for s,p,o,iss, iso, ilo in iter:
+	print( "Is shared subject (%s), is shared object(%s), is literal object(%s)" %(iss, iso, ilo))
 
 ```

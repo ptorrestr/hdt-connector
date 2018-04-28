@@ -4,22 +4,25 @@
 #include <HDTManager.hpp>
 #include <boost/python.hpp>
 #include <memory>
-#include "HDTTripleID.h"
 
 using namespace std;
 using namespace hdt;
 using namespace boost::python;
 
+class HDTConnector;
+
 class HDTIteratorTripleID
 {
 private:
   IteratorTripleID *iter = NULL;
+	HDTConnector *connector = NULL;
+	bool ext = false;
 
 public:
-  HDTIteratorTripleID(IteratorTripleID *iter);
+  HDTIteratorTripleID(IteratorTripleID *iter, HDTConnector *connector, bool ext);
   virtual ~HDTIteratorTripleID();
 
-  shared_ptr<HDTTripleID> next();
+	boost::python::tuple next();
 };
 
 #endif
