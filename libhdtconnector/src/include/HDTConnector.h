@@ -17,6 +17,10 @@ class HDTConnector
 private:
 	HDT *hdt;
 	bool is_dictionary_literal = false;
+	unsigned int number_shared = 0;
+	unsigned int number_subjects = 0;
+	unsigned int number_objects_literals = 0;
+	unsigned int mapping;
 
 public:
 	HDTConnector(const string &hdt_file, bool notify);

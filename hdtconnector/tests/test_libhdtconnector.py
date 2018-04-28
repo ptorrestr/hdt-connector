@@ -136,4 +136,4 @@ class TestHDTConnector(unittest.TestCase):
     m_map = HDTConnector(m_file)
     t_list = list(islice(m_map.search_id(0, 0, 0, ext = True), 10))
     for triple in t_list:
-      self.assertEqual(len(triple), 3)
+      self.assertEqual(len(triple), 6)

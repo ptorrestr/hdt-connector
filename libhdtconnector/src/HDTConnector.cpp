@@ -7,7 +7,13 @@ HDTConnector::HDTConnector(const string &hdt_file, bool notify) : hdt(NULL)
 		hdt = HDTManager::mapIndexedHDT(hdt_file.c_str(), &prog);
 		if (get_header_property("_:dictionary", "<http://purl.org/dc/terms/format>")
       == "<http://purl.org/HDT/hdt#dictionaryLiteral>")
+		{
 			is_dictionary_literal = true;
+			number_objects_literals = hdt ->getDictionary() ->getNobjectsLiterals();
+		}
+		number_shared = hdt -> getDictionary() ->getNshared();
+		number_subjects = hdt ->getDictionary()  ->getNsubjects();
+		mapping = hdt -> getDictionary() ->getMapping();
 	}
 	catch (...)
 	{
@@ -49,7 +55,7 @@ HDTConnector::search_id(const wstring& uri1, const wstring& uri2, const wstring 
 			( tid.getObject() == 0 && !suri3.empty() ) )
 	{
 		// If couldn't found the uris, return an empty iterator
-		return make_shared<HDTIteratorTripleID>( new IteratorTripleID() );
+		return make_shared<HDTIteratorTripleID>( new IteratorTripleID(), this, ext);
 	}
 	return search_id(tid, ext);
 }
@@ -65,7 +71,7 @@ shared_ptr<HDTIteratorTripleID>
 HDTConnector::search_id(TripleID& triple, bool ext)
 {
 	// search should receive a const tripleID&
-	return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(triple) );
+	return make_shared<HDTIteratorTripleID>( hdt -> getTriples() -> search(triple), this, ext);
 }
 
 wstring
@@ -84,7 +90,7 @@ HDTConnector::uri_to_id(const wstring& uri, const TripleComponentRole& role)
 bool
 HDTConnector::is_shared(unsigned int object_id)
 {
-	return object_id <= hdt -> getDictionary() ->getNshared() ? true : false;
+	return object_id <= number_shared ? true : false;
 }
 
 bool
@@ -94,10 +100,9 @@ HDTConnector::is_literal(unsigned int object_id)
 	{
 		if ( is_shared(object_id) )
 			return false;
-		unsigned int local_object_id = hdt -> getDictionary() ->getMapping() == MAPPING2 ?
-			object_id - hdt ->getDictionary() ->getNshared():
-			object_id - hdt ->getDictionary() ->getNshared() - hdt ->getDictionary()	->getNsubjects() + 2;
-		return local_object_id <= hdt ->getDictionary() -> getNobjectsLiterals() ?  true : false ;
+		unsigned int local_object_id = mapping == MAPPING2 ?
+			object_id - number_shared :	object_id - number_shared - number_subjects + 2;
+		return local_object_id <= number_objects_literals ?  true : false ;
 	}
 	else
 	{
